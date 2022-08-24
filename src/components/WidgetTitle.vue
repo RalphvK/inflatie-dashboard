@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-title">
+  <div class="widget-title mb-5">
     <h3 class="font-medium text-lg">
       <slot name="default"></slot>
     </h3>
