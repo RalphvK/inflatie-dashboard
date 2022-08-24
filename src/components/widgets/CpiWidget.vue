@@ -3,7 +3,7 @@
     <div class="flex flex-col sm:flex-row">
 
       <!-- left column -->
-      <div class="col">
+      <div class="col flex flex-col gap-5">
         <widget-title color="red">
           <template #default>
           Consumentenprijsindex (CPI)
@@ -12,14 +12,19 @@
             Stijging consumentenprijzen t.o.v. juli 2021
           </template>
         </widget-title>
-        <widget-measure
+
+        <main-measure
           icon="bi-cash-coin"
           icon-class="mt-2"
           value="12,5%"
           tickerSymbol="up"
           color="red"
         >
-        </widget-measure>
+        </main-measure>
+        
+        <sub-measure value="+2,5pt" color="red">
+          t.o.v. voorgaande maand
+        </sub-measure>
       </div>
 
       <!-- right column -->
@@ -34,13 +39,15 @@
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
-import WidgetMeasure from '@/components/WidgetMeasure.vue';
+import MainMeasure from '@/components/MainMeasure.vue';
+import SubMeasure from '@/components/SubMeasure.vue';
 
 export default {
   components: {
     DashboardCard,
     WidgetTitle,
-    WidgetMeasure
+    MainMeasure,
+    SubMeasure
   }
 }
 </script>

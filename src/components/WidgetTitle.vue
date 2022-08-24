@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-title mb-5">
+  <div class="widget-title">
     <h3 :class="`font-medium text-lg text-${color}-900`">
       <slot name="default"></slot>
     </h3>
