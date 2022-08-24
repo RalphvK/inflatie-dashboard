@@ -2,9 +2,13 @@
   <div class="measure">
 
     <div class="main-measure flex gap-x-4 items-center">
-      <measure-icon :icon="icon" background="slate-500" />
-      <measure-value :value="value" />
-      <measure-ticker-symbol class="-ml-2" :symbol="tickerSymbol" v-if="tickerSymbol" />
+      <measure-icon v-if="icon" :icon="icon" :background-color="color + '-600'" :icon-class="iconClass" />
+      <measure-value :value="value" :color="color + '-900'" />
+      <measure-ticker-symbol
+        class="-ml-2"
+        :symbol="tickerSymbol"
+        :color="color + '-600'"
+        v-if="tickerSymbol" />
     </div>
 
     <div class="secondary-measure">
@@ -31,6 +35,10 @@ export default {
       type: String,
       default: null
     },
+    iconClass: {
+      type: String,
+      default: null
+    },
     value: {
       type: String,
       required: true
@@ -38,6 +46,10 @@ export default {
     tickerSymbol: {
       type: String,
       default: false
+    },
+    color: {
+      type: String,
+      default: "slate"
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="measure-value font-serif text-5xl">
+  <div :class="'measure-value font-serif text-5xl text-'+color">
     <span v-for="part in parts" :class="part.type" v-html="part.content" />
   </div>
 </template>
@@ -12,6 +12,10 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    color: {
+      type: String,
+      default: 'slate-900'
     }
   },
   computed: {
