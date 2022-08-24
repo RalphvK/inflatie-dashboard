@@ -9,9 +9,11 @@
       </template>
     </widget-title>
     <widget-measure
-      icon="bi-cash"
+      icon="bi-cash-coin"
+      icon-class="mt-2"
       value="12,5%"
-      tickerSymbol="neutral"
+      tickerSymbol="up"
+      color="red"
     >
     </widget-measure>
   </dashboard-card>
