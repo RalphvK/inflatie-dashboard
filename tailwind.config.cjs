@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        '2xl-c': '0 0px 50px -15px var(--tw-shadow-color)',
+      }
+    },
     fontFamily: {
       'sans': ['Poppins', 'sans-serif'],
       'serif': ['Bitter', 'serif']
@@ -19,5 +23,8 @@ module.exports = {
     {
       pattern: /text-/,
     },
+    {
+      pattern: /shadow-/,
+    }
   ]
 }
