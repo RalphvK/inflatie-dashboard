@@ -1,5 +1,5 @@
 <template>
-  <div :class="'measure-value font-serif text-5xl text-'+color">
+  <div :class="`measure-value font-serif text-${getTextSize} text-${color}`">
     <span v-for="part in parts" :class="part.type" v-html="part.content" />
   </div>
 </template>
@@ -16,9 +16,31 @@ export default {
     color: {
       type: String,
       default: 'slate-900'
+    },
+    variant: {
+      type: String,
+      validator(value) {
+        return ['main', 'sub'].includes(value);
+      },
+      default: 'main'
+    },
+    textSize: {
+      type: String,
+      default: null
     }
   },
   computed: {
+    getTextSize() {
+      if (this.textSize) {
+        return this.textSize;
+      } else {
+        if (this.variant == 'main') {
+          return '5xl';
+        } else {
+          return '2xl';
+        }
+      }
+    },
     parts() {
       // if value length is less than 1, return empty array
       if (!this.value.length) { return []; }
