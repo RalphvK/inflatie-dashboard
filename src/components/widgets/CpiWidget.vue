@@ -1,5 +1,5 @@
 <template>
-  <dashboard-card background-color="red-50/70">
+  <dashboard-card color="red">
     <widget-title color="red">
       <template #default>
       Consumentenprijsindex (CPI)
