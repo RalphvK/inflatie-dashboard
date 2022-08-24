@@ -1,10 +1,21 @@
 <template>
   <div class="widget-title mb-5">
-    <h3 class="font-medium text-lg">
+    <h3 :class="`font-medium text-lg text-${color}-900`">
       <slot name="default"></slot>
     </h3>
-    <span class="font-medium text-sm">
+    <span :class="`font-medium text-sm text-${color}-900`">
       <slot name="subtitle"></slot>
     </span>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    color: {
+      type: String,
+      default: 'slate'
+    }
+  }
+}
+</script>
