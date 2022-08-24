@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        '2xl-c': '0 0px 50px -15px var(--tw-shadow-color)',
+        '3xl-c': '0 0px 60px -15px var(--tw-shadow-color)',
       }
     },
     fontFamily: {
