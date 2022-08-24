@@ -1,17 +1,19 @@
 <template>
   <div :class="`measure-value font-serif text-${getTextSize} text-${color}`">
-    <span v-for="part in parts" :class="part.type" v-html="part.content" />
+    <span v-for="part in getParts" :class="['part', part.type]" v-html="part.content" />
   </div>
 </template>
 
 <script>
-import { isDigitChar } from "@/helpers/isDigitChar.js";
+import { splitValueParts } from "@/helpers/splitValueParts.js";
 
 export default {
   props: {
     value: {
-      type: String,
-      required: true
+      type: String
+    },
+    parts: {
+      type: Array
     },
     color: {
       type: String,
@@ -41,50 +43,27 @@ export default {
         }
       }
     },
-    parts() {
-      // if value length is less than 1, return empty array
-      if (!this.value.length) { return []; }
-      let parts = [];
-      let i = 0;
-      let currentPart = '';
-      let currentPartType = null;
-      // iterate through string
-      for (let i = 0; i < this.value.length; i++) {
-        // check if current character is a number
-        let type = isDigitChar(this.value[i]) ? 'number' : 'other';
-        // if this character is of the same type as the current part, append
-        if (type == currentPartType || i == 0) {
-          currentPart += this.value[i];
-        // if this char is not of the same type, push the part to the list
-        } else {
-          parts.push({
-            type: currentPartType,
-            content: currentPart
-          });
-          // then start over and set the currentPart to this character
-          currentPart = this.value[i];
-        }
-        // then set currentPartType to the new type
-        currentPartType = type;
-      }
-      // add final part to list if not yet added
-      if (currentPart !== '') {
-        parts.push({
-          type: currentPartType,
-          content: currentPart
-        });
-      }
-      return parts;
+    getParts() {
+      return this.value ? splitValueParts(this.value) : this.parts;
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.number {
+.part {
   @apply font-bold;
-}
-.other {
-  @apply font-light;
+
+  &.currency,
+  &.percentage,
+  &.percentage-point,
+  &.period,
+  &.other {
+    @apply font-light;
+  }
+
+  &.percentage-point {
+    font-size: 0.9rem;
+  }
 }
 </style>

@@ -22,7 +22,7 @@
         >
         </main-measure>
         
-        <sub-measure value="+2,5pt" color="red">
+        <sub-measure value="+12,5pt" color="red">
           t.o.v. voorgaande maand
         </sub-measure>
       </div>
