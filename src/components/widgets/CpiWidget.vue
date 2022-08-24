@@ -13,18 +13,18 @@
           </template>
         </widget-title>
 
-        <main-measure
+        <measure-primary
           icon="bi-cash-coin"
           icon-class="mt-2"
           value="12,5%"
           tickerSymbol="up"
           color="red"
         >
-        </main-measure>
+        </measure-primary>
         
-        <sub-measure value="+12,5pt" color="red">
+        <measure-secondary value="+12,5pt" color="red">
           t.o.v. voorgaande maand
-        </sub-measure>
+        </measure-secondary>
       </div>
 
       <!-- right column -->
@@ -39,15 +39,15 @@
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
-import MainMeasure from '@/components/MainMeasure.vue';
-import SubMeasure from '@/components/SubMeasure.vue';
+import MeasurePrimary from '@/components/MeasurePrimary.vue';
+import MeasureSecondary from '@/components/MeasureSecondary.vue';
 
 export default {
   components: {
     DashboardCard,
     WidgetTitle,
-    MainMeasure,
-    SubMeasure
+    MeasurePrimary,
+    MeasureSecondary
   }
 }
 </script>
