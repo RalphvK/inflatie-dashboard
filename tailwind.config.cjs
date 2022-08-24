@@ -12,4 +12,12 @@ module.exports = {
     }
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /bg-/,
+    },
+    {
+      pattern: /text-/,
+    },
+  ]
 }
