@@ -1,22 +1,17 @@
 <template>
-  <div class="measure">
-
-    <div class="main-measure flex gap-x-4 items-center">
-      <measure-icon v-if="icon" :icon="icon" :background-color="color + '-600'" :icon-class="iconClass" />
-      <measure-value :value="value" :color="color + '-900'" />
+    <div class="flex gap-x-4 items-center">
+      <measure-icon
+        v-if="icon"
+        :icon="icon"
+        :background-color="color + '-600'"
+        :icon-class="iconClass" />
+      <measure-value :value="value" :color="color + '-900'" variant="main" />
       <measure-ticker-symbol
         class="-ml-2"
         :symbol="tickerSymbol"
         :color="color + '-600'"
         v-if="tickerSymbol" />
     </div>
-
-    <div class="secondary-measure">
-      <div class="secondary-measure-value"></div>
-      <div class="secondary-measure-remark"></div>
-    </div>
-
-  </div>
 </template>
 
 <script>
