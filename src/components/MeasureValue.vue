@@ -71,6 +71,9 @@ export default {
   &.percentage-point-symbol {
     font-size: 0.9rem;
     text-transform: uppercase;
+    font-weight: 500;
+    padding-left: 2px;
+    letter-spacing: -0.5px;
   }
 }
 </style>
