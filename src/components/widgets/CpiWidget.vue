@@ -1,6 +1,6 @@
 <template>
   <dashboard-card color="red">
-    <div class="flex flex-col sm:flex-row">
+    <div class="flex flex-col md:flex-row gap-5">
 
       <!-- left column -->
       <div class="col flex flex-col gap-5">
@@ -28,8 +28,8 @@
       </div>
 
       <!-- right column -->
-      <div class="col">
-        Visualisation will go here
+      <div class="col flex-grow">
+        <apexchart class="-mb-5" type="area" height="180px" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart>
       </div>
 
     </div>
@@ -47,6 +47,9 @@ import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import { SentientPercentage, SentientPercentagePoint } from '../../helpers/SentientNumbers';
+import { toSeries } from '@/helpers/toSeries.js';
+import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
+import colors from 'tailwindcss/colors';
 
 export default {
   components: {
@@ -61,6 +64,86 @@ export default {
     },
     PctPointPrevMonth() {
       return new SentientPercentagePoint(this.datasets.getCpiPercentagePointIncreaseToMonth);
+    },
+    series() {
+      if (!this.datasets.cpi) { return null; }
+      let series = toSeries(this.datasets.cpi, [
+        'Perioden_title',
+        'Value'
+      ]);
+      return series;
+    },
+    seriesValues() {
+      return [{
+        name: 'Jaarmutatie CPI',
+        data: this.series['Value']
+      }]
+    },
+    chartOptions() {
+      if (!this.datasets.cpi) { return null; }
+      let series = this.series;
+      return {
+        colors: [colors.red[300]],
+        chart: {
+          type: 'area',
+          animations: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          },
+          height: '100%'
+        },
+        yaxis: {
+          labels: {
+            show: false
+          }
+        },
+        xaxis: {
+          categories: series['Perioden_title'],
+          labels: {
+            show: true,
+            formatter: function (value) {
+              return getShortYearAndMonth(value);
+            },
+            style: {
+              fontSize: '8px'
+            }
+          },
+          axisBorder: {
+            show: false
+          }
+        },
+        grid: {
+          show: false
+        },
+        legend: {
+          show: false
+        },
+        dataLabels: {
+          enabled: false
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 2,
+              borderColor: colors.emerald[500],
+              label: {
+                borderColor: 'transparent',
+                style: {
+                  color: colors.emerald[500],
+                  background: 'transparent'
+                },
+                text: 'Target: 2%'
+              }
+            }
+          ]
+        }
+
+      }
     }
   }
 }
