@@ -16,13 +16,13 @@
         <measure-primary
           icon="bi-cash-coin"
           icon-class="mt-2"
-          value="12,5%"
+          :value="CpiYtd"
           tickerSymbol="up"
           color="red"
         >
         </measure-primary>
         
-        <measure-secondary value="+12,5pt" color="red">
+        <measure-secondary :value="PctPointPrevMonth" color="red">
           t.o.v. voorgaande maand
         </measure-secondary>
       </div>
@@ -36,6 +36,11 @@
   </dashboard-card>
 </template>
 
+<script setup>
+  import {useDatasets} from '@/store/DatasetsStore.js';
+  const datasets = useDatasets();
+</script>
+
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
@@ -48,6 +53,14 @@ export default {
     WidgetTitle,
     MeasurePrimary,
     MeasureSecondary
+  },
+  computed: {
+    CpiYtd() {
+      return this.datasets.getCpiYtd;
+    },
+    PctPointPrevMonth() {
+      return this.datasets.getCpiPercentagePointIncreaseToMonth;
+    }
   }
 }
 </script>
