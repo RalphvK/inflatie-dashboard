@@ -1,10 +1,21 @@
 import { isInteger, parseInt } from "lodash";
 
+export const NUM_NUMBER = 'number'; // number, with or without decimals
+export const NUM_PERCENT = 'percent'; // percentage
+export const NUM_PERCENTPOINT = 'percentpoint'; // percentage point
+export const NUM_CURRENCY = 'currency'; // currency
+
 export class numericValue {
   intValue = 0;
   precision = 0; // number of digits after decimal sep
+  type = NUM_NUMBER; // type of number
+  currencySymbol = '€';
 
-  parse(value, dcml = '.') {
+  constructor(...args) {
+    return this.parse(...args);
+  }
+
+  parse(value, type = NUM_NUMBER, dcml = '.') {
     // if it is an integer, set intValue directly
     if (isInteger(value)) {
       this.intValue = value;
