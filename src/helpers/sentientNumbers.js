@@ -8,7 +8,7 @@ export class SentientNumber {
   separator_thousands = '.';
   currencySymbol = '€';
   percentageSymbol = '%';
-  percentagePointSymbol = '%pt'
+  percentagePointSymbol = 'ppt'
 
   constructor(...args) {
     return this.parse(...args);
