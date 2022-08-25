@@ -1,19 +1,18 @@
 <template>
   <div :class="`measure-value font-serif text-${getTextSize} text-${color}`">
-    <span v-for="part in getParts" :class="['part', part.type]" v-html="part.content" />
+    <span v-for="part in getParts" :class="['part', part.type]" v-html="part.value" />
   </div>
 </template>
 
 <script>
 import { splitValueParts } from "@/helpers/splitValueParts.js";
+import { isObject, isString } from "@vue/shared";
 
 export default {
   props: {
     value: {
-      type: String
-    },
-    parts: {
-      type: Array
+      type: [String, Object],
+      required: true
     },
     color: {
       type: String,
@@ -44,7 +43,16 @@ export default {
       }
     },
     getParts() {
-      return this.value ? splitValueParts(this.value) : this.parts;
+      if (isObject(this.value)) {
+        return this.value.toParts();
+      } else {
+        return [
+          {
+            type: 'direct-string',
+            value: this.value
+          }
+        ]
+      }
     }
   }
 }
@@ -52,14 +60,12 @@ export default {
 
 <style scoped lang="scss">
 .part {
-  @apply font-bold;
+  @apply font-light;
 
-  &.currency,
-  &.percentage,
-  &.percentage-point,
-  &.period,
-  &.other {
-    @apply font-light;
+  &.integral,
+  &.fractional,
+  &.decimal-separator {
+    @apply font-bold;
   }
 
   &.percentage-point {

@@ -35,7 +35,7 @@ export default {
       default: null
     },
     value: {
-      type: String,
+      type: [String, Object],
       required: true
     },
     tickerSymbol: {
