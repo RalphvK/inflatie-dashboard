@@ -68,8 +68,9 @@ export default {
     @apply font-bold;
   }
 
-  &.percentage-point {
+  &.percentage-point-symbol {
     font-size: 0.9rem;
+    text-transform: uppercase;
   }
 }
 </style>

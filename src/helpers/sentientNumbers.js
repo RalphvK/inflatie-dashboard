@@ -1,12 +1,14 @@
 import { isInteger, parseInt } from "lodash";
 import { splitThousands } from "@/helpers/splitThousands";
 
-export class sentientNumber {
+export class SentientNumber {
   intValue = 0;
   precision = 0; // number of digits after decimal sep
-  currencySymbol = '€';
   separator_decimal = ',';
   separator_thousands = '.';
+  currencySymbol = '€';
+  percentageSymbol = '%';
+  percentagePointSymbol = '%pt'
 
   constructor(...args) {
     return this.parse(...args);
@@ -116,4 +118,26 @@ export class sentientNumber {
     return str;
   }
 
+}
+
+export class SentientPercentage extends SentientNumber {
+  toParts() {
+    let parts = super.toParts();
+    parts.push({
+      type: 'percentage-symbol',
+      value: this.percentageSymbol
+    });
+    return parts;
+  }
+}
+
+export class SentientPercentagePoint extends SentientNumber {
+  toParts() {
+    let parts = super.toParts();
+    parts.push({
+      type: 'percentage-point-symbol',
+      value: this.percentagePointSymbol
+    });
+    return parts;
+  }
 }

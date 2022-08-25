@@ -1,23 +1,23 @@
 import { describe, assert, it, expect } from "vitest";
 
-import { sentientNumber } from '@/helpers/sentientNumbers.js';
+import { SentientNumber, SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumbers.js';
 
-describe('sentientNumber', () => {
+describe('SentientNumber', () => {
   
   it('parse', () => {
     // test with period
-    let numObj = new sentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('34,000,000.62', '.');
     assert.equal(numObj.intValue, 3400000062);
     assert.equal(numObj.precision, 2);
     // test with comma
-    let numObj2 = new sentientNumber('34.000.000,62', ',');
+    let numObj2 = new SentientNumber('34.000.000,62', ',');
     assert.equal(numObj.intValue, 3400000062);
     assert.equal(numObj.precision, 2);
   });
   
   it('getDecimalParts', () => {
     // test with period
-    let numObj = new sentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('34,000,000.62', '.');
     const decimalParts = numObj.getDecimalParts();
     assert.equal(decimalParts.integral, '34000000');
     assert.equal(decimalParts.fractional, '62');
@@ -25,7 +25,7 @@ describe('sentientNumber', () => {
   
   it('getFormattingChunks', () => {
     // test with period
-    let numObj = new sentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('34,000,000.62', '.');
     const formattingChunks = numObj.getFormattingChunks();
     expect(formattingChunks.integral).toEqual(['34', '000', '000']);
     expect(formattingChunks.fractional).toEqual('62');
@@ -33,7 +33,7 @@ describe('sentientNumber', () => {
   
   it('toParts', () => {
     // test with period
-    let numObj = new sentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('34,000,000.62', '.');
     const parts = numObj.toParts();
     expect(parts).toEqual([
       { type: 'integral', value: '34' },
@@ -44,12 +44,25 @@ describe('sentientNumber', () => {
       { type: 'decimal-separator', value: ',' },
       { type: 'fractional', value: '62' },
     ]);
-    console.log(parts)
   });
 
   it('toString', () => {
-    let numObj = new sentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('34,000,000.62', '.');
     expect(numObj.toString()).toEqual('34.000.000,62');
   });
   
+});
+
+describe('SentientPercentage', () => {
+  it('toString', () => {
+    let numObj = new SentientPercentage('12.5', '.');
+    expect(numObj.toString()).toEqual('12,5%');
+  })
+});
+
+describe('SentientPercentagePoint', () => {
+  it('toString', () => {
+    let numObj = new SentientPercentagePoint('12.5', '.');
+    expect(numObj.toString()).toEqual('12,5%pt');
+  })
 });

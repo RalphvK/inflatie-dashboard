@@ -46,7 +46,7 @@ import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
-import { sentientNumber } from '../../helpers/sentientNumbers';
+import { SentientPercentage, SentientPercentagePoint } from '../../helpers/SentientNumbers';
 
 export default {
   components: {
@@ -57,10 +57,10 @@ export default {
   },
   computed: {
     CpiYtd() {
-      return new sentientNumber(this.datasets.getCpiYtd);
+      return new SentientPercentage(this.datasets.getCpiYtd);
     },
     PctPointPrevMonth() {
-      return new sentientNumber(this.datasets.getCpiPercentagePointIncreaseToMonth);
+      return new SentientPercentagePoint(this.datasets.getCpiPercentagePointIncreaseToMonth);
     }
   }
 }
