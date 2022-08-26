@@ -54,7 +54,6 @@ import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import ChartArea from '@/components/ChartArea.vue';
-import { SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumbers';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
 import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
@@ -70,6 +69,7 @@ export default {
   },
   computed: {
     themeColor() {
+      if (!this.datasets._ready) { return 'neutral'; }
       return colorMappingDesc(this.CpiYtd.intValue, [
         {min: 5, color: THEME.danger},
         {min: 3, color: THEME.warning},
@@ -78,10 +78,10 @@ export default {
       ], THEME.danger);
     },
     CpiYtd() {
-      return new SentientPercentage(this.datasets.getCpiYtd);
+      return this.datasets.getCpiYtd;
     },
     PctPointPrevMonth() {
-      return new SentientPercentagePoint(this.datasets.getCpiPercentagePointIncreaseToMonth);
+      return this.datasets.getCpiPercentagePointIncreaseToMonth;
     },
     series() {
       if (!this.datasets.cpi) { return null; }
