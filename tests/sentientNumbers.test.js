@@ -55,14 +55,14 @@ describe('SentientNumber', () => {
 
 describe('SentientPercentage', () => {
   it('toString', () => {
-    let numObj = new SentientPercentage('12.5', '.');
-    expect(numObj.toString()).toEqual('12,5' + numObj.percentageSymbol);
+    let numObj = new SentientPercentage('102.5', '.');
+    expect(numObj.toString()).toEqual('102,5' + numObj.percentageSymbol);
   })
 });
 
 describe('SentientPercentagePoint', () => {
   it('toString', () => {
-    let numObj = new SentientPercentagePoint('12.5', '.');
-    expect(numObj.toString()).toEqual('12,5' + numObj.percentagePointSymbol);
+    let numObj = new SentientPercentagePoint('102.5', '.');
+    expect(numObj.toString()).toEqual('102,5' + numObj.percentagePointSymbol);
   })
 });

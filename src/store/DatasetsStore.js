@@ -1,32 +1,33 @@
 import { defineStore } from "pinia";
-import { last, merge, round } from "lodash";
-import { SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumbers';
+import { merge } from "lodash";
+import { dataPptLastToPrev } from "@/helpers/dataPptLastToPrev.js";
+import { dataGetLast } from "@/helpers/dataGetLast.js";
 
 export const useDatasets = defineStore({
   id: 'datasets',
 
   state: () => ({
     _ready: false,
-    cpi: null
+    cpi: null,
+    cpi_energie: null
   }),
 
   getters: {
-    getCpiYtd(state) {
-      let lastRow = last(state.cpi) ?? null;
-      return lastRow
-        ? new SentientPercentage(lastRow.Value)
-        : '-'
+    // CPI
+    g_cpi_YTD(state) {
+      return dataGetLast(state.cpi);
     },
-    getCpiPercentagePointIncreaseToMonth(state) {
-      // check if data is present and more than 1 element
-      if (Array.isArray(state.cpi) && state.cpi.length > 0) {
-        let lastValue = state.cpi[state.cpi.length - 1].Value;
-        let prevValue = state.cpi[state.cpi.length - 2].Value;
-        return new SentientPercentagePoint(round(lastValue - prevValue, 1));
-      } else {
-        return '-';
-      }
-    }
+    g_cpi_PPT(state) {
+      return dataPptLastToPrev(state.cpi);
+    },
+
+    // CPI energy
+    g_cpiEnergy_YTD(state) {
+      return dataGetLast(state.cpi_energie);
+    },
+    g_cpiEnergy_PPT(state) {
+      return dataPptLastToPrev(state.cpi_energie);
+    },
   },
 
   actions: {
