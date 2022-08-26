@@ -7,7 +7,7 @@
  * @param {Array<String>} columns array of columns that you want to get as a series
  * @returns {Object<Array>} return an object with structure of {ColumnName: [val1, val2]}
  */
-export function toSeries(rows, columns)
+export function dataToSeries(rows, columns)
 {
   // check if both params are arrays
   if (!Array.isArray(rows) || !Array.isArray(columns)) {

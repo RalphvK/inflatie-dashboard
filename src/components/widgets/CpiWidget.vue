@@ -29,7 +29,7 @@
 
       <!-- right column -->
       <div class="col flex-grow">
-        <apexchart class="-mb-5" type="area" height="180px" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart>
+        <apexchart class="-mb-12 -mt-8" type="area" height="240" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart>
       </div>
 
     </div>
@@ -47,7 +47,8 @@ import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import { SentientPercentage, SentientPercentagePoint } from '../../helpers/SentientNumbers';
-import { toSeries } from '@/helpers/toSeries.js';
+import { dataToSeries } from '@/helpers/dataToSeries.js';
+import dataGetMax from '@/helpers/dataGetMax.js';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 import colors from 'tailwindcss/colors';
 
@@ -67,7 +68,7 @@ export default {
     },
     series() {
       if (!this.datasets.cpi) { return null; }
-      let series = toSeries(this.datasets.cpi, [
+      let series = dataToSeries(this.datasets.cpi, [
         'Perioden_title',
         'Value'
       ]);
@@ -100,7 +101,9 @@ export default {
         yaxis: {
           labels: {
             show: false
-          }
+          },
+          min: 0,
+          max: dataGetMax(this.series.Value)
         },
         xaxis: {
           categories: series['Perioden_title'],
@@ -110,7 +113,8 @@ export default {
               return getShortYearAndMonth(value);
             },
             style: {
-              fontSize: '8px'
+              fontSize: '8px',
+              cssClass: 'x-labels'
             }
           },
           axisBorder: {
@@ -148,3 +152,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .x-labels {
+    opacity: 0.8;
+  }
+</style>
