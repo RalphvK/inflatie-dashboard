@@ -9,7 +9,8 @@ export const useDatasets = defineStore({
   state: () => ({
     _ready: false,
     cpi: null,
-    cpi_energie: null
+    cpi_energie: null,
+    cpi_voedingsmiddelen: null
   }),
 
   getters: {
@@ -27,6 +28,14 @@ export const useDatasets = defineStore({
     },
     g_cpiEnergy_PPT(state) {
       return dataPptLastToPrev(state.cpi_energie);
+    },
+
+    // CPI food
+    g_cpiFood_YTD(state) {
+      return dataGetLast(state.cpi_voedingsmiddelen);
+    },
+    g_cpiFood_PPT(state) {
+      return dataPptLastToPrev(state.cpi_voedingsmiddelen);
     },
   },
 

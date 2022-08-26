@@ -4,7 +4,7 @@
       <div class="grid justify-items-stretch gap-5 lg:grid-cols-3 md:grid-cols:2">
         <cpi-widget class="col-span-3"></cpi-widget>
         <cpi-energy-widget></cpi-energy-widget>
-        <cpi-energy-widget></cpi-energy-widget>
+        <cpi-food-widget></cpi-food-widget>
         <cpi-energy-widget></cpi-energy-widget>
       </div>
     </div>
@@ -14,11 +14,13 @@
 <script>
 import CpiWidget from '@/components/widgets/CpiWidget.vue';
 import CpiEnergyWidget from '@/components/widgets/CpiEnergyWidget.vue';
+import CpiFoodWidget from '@/components/widgets/CpiFoodWidget.vue';
 
 export default {
   components: {
     CpiWidget,
-    CpiEnergyWidget
+    CpiEnergyWidget,
+    CpiFoodWidget
   }
 }
 </script>

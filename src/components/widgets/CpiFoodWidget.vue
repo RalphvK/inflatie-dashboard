@@ -3,13 +3,13 @@
     <div class="flex flex-col md:flex-row gap-5">
 
       <!-- left column -->
-      <div class="col flex flex-col gap-5 min-w-max">
+      <div class="col flex flex-col gap-5">
         <widget-title :color="themeColor">
           <template #default>
-          Consumentenprijsindex (CPI)
+          CPI voedingsmiddelen
           </template>
           <template #subtitle>
-            Jaarmutatie juli 2022 t.o.v. jaar eerder
+            Prijstijging voedingsmiddelen juli 2021 - 2022
           </template>
         </widget-title>
 
@@ -27,18 +27,6 @@
         </measure-secondary>
       </div>
 
-      <!-- right column -->
-      <div class="col flex-grow">
-        <!-- <apexchart class="-mb-12 -mt-8" type="area" height="240" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart> -->
-        <chart-area
-          :data-series="chartDataSeries"
-          :categories="chartCategories"
-          :yMax="series ? dataGetMax(series.Value) : 0"
-          :x-formatter="ChartXFormatter"
-          :color="themeColor"
-        />
-      </div>
-
     </div>
   </dashboard-card>
 </template>
@@ -53,13 +41,9 @@ import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
-import ChartArea from '@/components/ChartArea.vue';
-import { dataToSeries } from '@/helpers/dataToSeries.js';
-import { dataGetMax } from '@/helpers/dataGetMax.js';
-import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
-import { getTickerSymbol } from '@/helpers/getTickerSymbol';
+import { getTickerSymbol } from '@/helpers/getTickerSymbol.js';
 
 export default {
   components: {
@@ -79,37 +63,13 @@ export default {
       ], THEME.danger);
     },
     CpiYtd() {
-      return this.datasets.g_cpi_YTD;
+      return this.datasets.g_cpiFood_YTD;
     },
     PptPrevMonth() {
-      return this.datasets.g_cpi_PPT;
+      return this.datasets.g_cpiFood_PPT;
     },
     tickerSymbol() {
       return getTickerSymbol(this.CpiYtd);
-    },
-    series() {
-      if (!this.datasets.cpi) { return null; }
-      let series = dataToSeries(this.datasets.cpi, [
-        'Perioden_title',
-        'Value'
-      ]);
-      return series;
-    },
-    chartDataSeries() {
-      if (!this.series) { return null; }
-      return [{
-        name: 'Jaarmutatie CPI',
-        data: this.series.Value
-      }]
-    },
-    chartCategories() {
-      if (!this.series) { return null; }
-      return this.series.Perioden_title;
-    }
-  },
-  methods: {
-    ChartXFormatter(value) {
-      return getShortYearAndMonth(value);
     }
   }
 }

@@ -17,7 +17,7 @@
           icon="bi-cash-coin"
           icon-class="mt-2"
           :value="CpiYtd"
-          tickerSymbol="up"
+          :tickerSymbol="tickerSymbol"
           :color="themeColor"
         >
         </measure-primary>
@@ -43,6 +43,7 @@ import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
+import { getTickerSymbol } from '@/helpers/getTickerSymbol';
 
 export default {
   components: {
@@ -66,6 +67,9 @@ export default {
     },
     PptPrevMonth() {
       return this.datasets.g_cpiEnergy_PPT;
+    },
+    tickerSymbol() {
+      return getTickerSymbol(this.CpiYtd);
     }
   }
 }
