@@ -1,10 +1,10 @@
 <template>
-  <dashboard-card color="red">
+  <dashboard-card :color="themeColor">
     <div class="flex flex-col md:flex-row gap-5">
 
       <!-- left column -->
       <div class="col flex flex-col gap-5">
-        <widget-title color="red">
+        <widget-title :color="themeColor">
           <template #default>
           Consumentenprijsindex (CPI)
           </template>
@@ -18,18 +18,25 @@
           icon-class="mt-2"
           :value="CpiYtd"
           tickerSymbol="up"
-          color="red"
+          :color="themeColor"
         >
         </measure-primary>
         
-        <measure-secondary :value="PctPointPrevMonth" color="red">
+        <measure-secondary :value="PctPointPrevMonth" :color="themeColor">
           t.o.v. voorgaande maand
         </measure-secondary>
       </div>
 
       <!-- right column -->
       <div class="col flex-grow">
-        <apexchart class="-mb-12 -mt-8" type="area" height="240" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart>
+        <!-- <apexchart class="-mb-12 -mt-8" type="area" height="240" width="100%" :options="chartOptions" :series="seriesValues" v-if="datasets.cpi"></apexchart> -->
+        <chart-area
+          :data-series="chartDataSeries"
+          :categories="chartCategories"
+          :yMax="series ? dataGetMax(series.Value) : 0"
+          :x-formatter="ChartXFormatter"
+          :color="themeColor"
+        />
       </div>
 
     </div>
@@ -46,11 +53,13 @@ import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
-import { SentientPercentage, SentientPercentagePoint } from '../../helpers/SentientNumbers';
+import ChartArea from '@/components/ChartArea.vue';
+import { SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumbers';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
-import dataGetMax from '@/helpers/dataGetMax.js';
+import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
-import colors from 'tailwindcss/colors';
+import { colorMappingDesc } from '@/helpers/colorMapping.js';
+import { THEME } from '@/config/constants.js';
 
 export default {
   components: {
@@ -60,6 +69,14 @@ export default {
     MeasureSecondary
   },
   computed: {
+    themeColor() {
+      return colorMappingDesc(this.CpiYtd.intValue, [
+        {min: 5, color: THEME.danger},
+        {min: 3, color: THEME.warning},
+        {min: 1, color: THEME.success},
+        {min: 0, color: THEME.warning},
+      ], THEME.danger);
+    },
     CpiYtd() {
       return new SentientPercentage(this.datasets.getCpiYtd);
     },
@@ -74,87 +91,22 @@ export default {
       ]);
       return series;
     },
-    seriesValues() {
+    chartDataSeries() {
+      if (!this.series) { return null; }
       return [{
         name: 'Jaarmutatie CPI',
-        data: this.series['Value']
+        data: this.series.Value
       }]
     },
-    chartOptions() {
-      if (!this.datasets.cpi) { return null; }
-      let series = this.series;
-      return {
-        colors: [colors.red[300]],
-        chart: {
-          type: 'area',
-          animations: {
-            enabled: false
-          },
-          toolbar: {
-            show: false
-          },
-          zoom: {
-            enabled: false
-          },
-          height: '100%'
-        },
-        yaxis: {
-          labels: {
-            show: false
-          },
-          min: 0,
-          max: dataGetMax(this.series.Value)
-        },
-        xaxis: {
-          categories: series['Perioden_title'],
-          labels: {
-            show: true,
-            formatter: function (value) {
-              return getShortYearAndMonth(value);
-            },
-            style: {
-              fontSize: '8px',
-              cssClass: 'x-labels'
-            }
-          },
-          axisBorder: {
-            show: false
-          }
-        },
-        grid: {
-          show: false
-        },
-        legend: {
-          show: false
-        },
-        dataLabels: {
-          enabled: false
-        },
-        annotations: {
-          yaxis: [
-            {
-              y: 2,
-              borderColor: colors.emerald[500],
-              label: {
-                borderColor: 'transparent',
-                style: {
-                  color: colors.emerald[500],
-                  background: 'transparent'
-                },
-                text: 'Target: 2%'
-              }
-            }
-          ]
-        }
-
-      }
+    chartCategories() {
+      if (!this.series) { return null; }
+      return this.series.Perioden_title;
+    }
+  },
+  methods: {
+    ChartXFormatter(value) {
+      return getShortYearAndMonth(value);
     }
   }
 }
 </script>
-
-<style>
-  .x-labels {
-    opacity: 0.8;
-  }
-</style>

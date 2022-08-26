@@ -1,6 +1,6 @@
 import { isUndefined, max as _max, toNumber } from "lodash";
 
-export default function(valueSeries = []) {
+export function dataGetMax(valueSeries = []) {
   let numberSeries = [];
   // convert each element to number
   for (let i = 0; i < valueSeries.length; i++) {
