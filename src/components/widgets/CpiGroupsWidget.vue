@@ -1,22 +1,26 @@
 <template>
   <dashboard-card :color="themeColor">
-    <div class="flex flex-col md:flex-row gap-5">
+    <div>
 
       <!-- left column -->
       <div class="col flex flex-col gap-5">
         <widget-title :color="themeColor">
           <template #default>
-          Top {{this.groupCount}} grootste stijging
+          Top {{this.groupCount}} grootste stijgers
           </template>
         </widget-title>
 
-        <div>
-          <div class="text-sm" v-for="item in TopGroups">
-            {{item.name}}: {{item.value}}
-          </div>
+        <div class="-mx-7 -mb-3">
+          <table class="mx-0 w-full">
+            <tbody :class="`divide-y divide-${themeColor}-900/10`">
+              <tr v-for="item in TopGroups">
+                <cpi-group-row :item="item" padding-size="7" />
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
 
+      </div>
     </div>
   </dashboard-card>
 </template>
@@ -29,18 +33,17 @@
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
-import MeasurePrimary from '@/components/MeasurePrimary.vue';
-import MeasureSecondary from '@/components/MeasureSecondary.vue';
+import CpiGroupRow from '@/components/CpiGroupRow.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { toNumber } from '@vue/shared';
+import { SentientPercentage } from '@/helpers/SentientNumbers.js';
 
 export default {
   components: {
     DashboardCard,
     WidgetTitle,
-    MeasurePrimary,
-    MeasureSecondary
+    CpiGroupRow
   },
   props: {
     groupCount: {
@@ -61,7 +64,7 @@ export default {
       for (let i = 0; i < topGroups.length; i++) {
         displayItems.push({
           name: topGroups[i].Bestedingscategorieen_title.slice(7),
-          value: topGroups[i].Value
+          value: new SentientPercentage(topGroups[i].Value)
         });
       }
       return displayItems;

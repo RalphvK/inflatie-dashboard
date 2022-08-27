@@ -1,9 +1,9 @@
 <template>
   <dashboard-card :color="themeColor">
-    <div class="flex flex-col md:flex-row gap-5">
+    <div class="flex flex-col md:flex-row gap-5 h-full">
 
       <!-- left column -->
-      <div class="col flex flex-col gap-5">
+      <div class="col flex flex-col gap-5 justify-between">
         <widget-title :color="themeColor">
           <template #default>
           CPI Energie

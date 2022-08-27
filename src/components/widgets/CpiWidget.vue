@@ -1,9 +1,9 @@
 <template>
   <dashboard-card :color="themeColor">
-    <div class="flex flex-col md:flex-row gap-5">
+    <div class="flex flex-col md:flex-row gap-5 h-full">
 
       <!-- left column -->
-      <div class="col flex flex-col gap-5 min-w-max">
+      <div class="col flex flex-col gap-5 min-w-max justify-between">
         <widget-title :color="themeColor">
           <template #default>
           Consumentenprijsindex (CPI)
