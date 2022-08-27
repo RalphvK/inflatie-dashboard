@@ -33,7 +33,6 @@ import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
-import { getTickerSymbol } from '@/helpers/getTickerSymbol';
 import { toNumber } from '@vue/shared';
 
 export default {
@@ -52,12 +51,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready || !this.TopGroupValue) { return 'neutral'; }
-      return colorMappingDesc(this.TopGroupValue, [
-        {min: 5, color: THEME.danger},
-        {min: 3, color: THEME.warning},
-        {min: 1, color: THEME.success},
-        {min: 0, color: THEME.warning},
-      ], THEME.danger);
+      return colorMappingDesc(this.TopGroupValue);
     },
     TopGroups() {
       if (!Array.isArray(this.datasets.g_cpiGroups_top)) { return null; }

@@ -71,12 +71,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYtd.intValue, [
-        {min: 5, color: THEME.danger},
-        {min: 3, color: THEME.warning},
-        {min: 1, color: THEME.success},
-        {min: 0, color: THEME.warning},
-      ], THEME.danger);
+      return colorMappingDesc(this.CpiYtd.intValue);
     },
     CpiYtd() {
       return this.datasets.g_cpi_YTD;
