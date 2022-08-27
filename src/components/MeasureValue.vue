@@ -102,10 +102,10 @@ export default {
   }
 
   &.percentage-point-symbol {
-    font-size: 0.55em;
+    font-size: 0.7em;
     text-transform: uppercase;
     font-weight: 500;
-    padding-left: 2px;
+    padding-left: 4px;
     letter-spacing: -0.5px;
   }
 }
