@@ -8,9 +8,6 @@ module.exports = {
     extend: {
       boxShadow: {
         '3xl-c': '0 0px 60px -15px var(--tw-shadow-color)',
-      },
-      screens: {
-        'sm': '670px',
       }
     },
     fontFamily: {

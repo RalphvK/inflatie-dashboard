@@ -33,8 +33,11 @@ export default {
 
 <style scoped lang="scss">
 .icon-circle {
-  @apply flex justify-center items-center rounded-full w-12 h-12;
+  @apply flex justify-center items-center rounded-full;
   overflow: hidden;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
 
   i {
     font-size: v-bind(iconSize);

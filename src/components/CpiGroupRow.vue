@@ -1,5 +1,5 @@
 <template>
-  <td :class="`pr-2 py-2 flex pl-${paddingSize}`">
+  <td :class="`pr-2 py-2 flex pl-${paddingSize} max-w-max`">
     <measure-ticker-symbol
       class="-mt-1 mr-1"
       :symbol="tickerSymbol"
@@ -14,7 +14,7 @@
       :color="themeColor + '-900'"
     />
   </td>
-  <td :class="`pr-${paddingSize}`">
+  <td :class="`pr-${paddingSize} w-full`">
     <div :class="`text-${labelFontSize} text-regular text-${themeColor}-900`">
       {{ item.name }}
     </div>
