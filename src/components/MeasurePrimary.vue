@@ -9,6 +9,7 @@
         :value="value"
         :color="color + '-900'"
         variant="main"
+        :show-plus="showPlus"
         :skeleton-width="200" />
       <measure-ticker-symbol
         class="-ml-2"
@@ -49,6 +50,10 @@ export default {
     color: {
       type: String,
       default: "slate"
+    },
+    showPlus: {
+      type: Boolean,
+      default: false
     }
   }
 }
