@@ -36,8 +36,8 @@ export class SentientNumber {
 
     // else convert to string
     value = String(value);
-    // remove any chars that are not numeric or the decimal
-    value = value.replace(new RegExp('[^0-9'+ dcml +']', 'g'), '');
+    // remove any chars that are not numeric, minus or the decimal
+    value = value.replace(new RegExp("[^0-9"+ dcml +'-]', 'g'), '');
     // remove all demicals except last
     value = value.replace(new RegExp('['+ dcml +'](?='+ dcml +'*['+ dcml +'])', 'g'), '');
     // split on decimal
@@ -94,10 +94,15 @@ export class SentientNumber {
 
     // add integral chunks with thousands separator
     for (let i = 0; i < formattingChunks.integral.length; i++) {
-      parts.push({ type: 'integral', value: formattingChunks.integral[i]});
-      // if not last, add thousands separator
-      if (i + 1 < formattingChunks.integral.length) {
-        parts.push({ type: 'thousands-separator', value: this.separator_thousands});
+      // if minus, add part type minus-symbol
+      if (formattingChunks.integral[i] == '-') {
+        parts.push({ type: 'minus-symbol', value: formattingChunks.integral[i]});
+      } else {
+        parts.push({ type: 'integral', value: formattingChunks.integral[i]});
+        // if not last, add thousands separator
+        if (i + 1 < formattingChunks.integral.length) {
+          parts.push({ type: 'thousands-separator', value: this.separator_thousands});
+        }
       }
     }
 

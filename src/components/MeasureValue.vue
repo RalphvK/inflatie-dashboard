@@ -33,6 +33,10 @@ export default {
     },
     skeletonWidth: {
       default: 100
+    },
+    showPlus: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -52,7 +56,15 @@ export default {
     },
     getParts() {
       if (isObject(this.value)) {
-        return this.value.toParts();
+        let parts = [];
+        if (this.showPlus && this.value.intValue > 0) {
+          parts.push({
+            type: 'plus-symbol',
+            value: '+'
+          });
+        }
+        parts.push(...this.value.toParts());
+        return parts;
       } else {
         return [
           {
@@ -83,8 +95,14 @@ export default {
     @apply font-bold;
   }
 
+  &.plus-symbol {
+    font-size: 0.5em;
+    vertical-align: middle;
+    font-weight: 600;
+  }
+
   &.percentage-point-symbol {
-    font-size: 0.9rem;
+    font-size: 0.55em;
     text-transform: uppercase;
     font-weight: 500;
     padding-left: 2px;

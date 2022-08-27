@@ -15,6 +15,22 @@ describe('SentientNumber', () => {
     assert.equal(numObj.precision, 2);
   });
   
+  it('parse-negative', () => {
+    // test with period
+    let value = '-34,000,000.62';
+    let dcml = '.';
+    let numObj = new SentientNumber(value, '.');
+    value = value.replace(new RegExp("[^0-9"+ dcml +'-]', 'g'), '');
+    console.log(value);
+    value = value.replace(new RegExp('['+ dcml +'](?='+ dcml +'*['+ dcml +'])', 'g'), '');
+    console.log(value);
+    let parts = value.split(dcml);
+    let intvalue = parseInt(parts.join(''));
+    console.log(intvalue);
+    assert.equal(numObj.intValue, -3400000062);
+    assert.equal(numObj.precision, 2);
+  });
+  
   it('getDecimalParts', () => {
     // test with period
     let numObj = new SentientNumber('34,000,000.62', '.');
@@ -33,9 +49,11 @@ describe('SentientNumber', () => {
   
   it('toParts', () => {
     // test with period
-    let numObj = new SentientNumber('34,000,000.62', '.');
+    let numObj = new SentientNumber('-34,000,000.62', '.');
     const parts = numObj.toParts();
+    console.log(parts);
     expect(parts).toEqual([
+      { type: 'minus-symbol', value: '-' },
       { type: 'integral', value: '34' },
       { type: 'thousands-separator', value: '.' },
       { type: 'integral', value: '000' },
