@@ -9,14 +9,14 @@
           CPI Energie
           </template>
           <template #subtitle>
-            Stijging energieprijzen juli 2021 - 2022
+            Jaarmutatie juli 2022
           </template>
         </widget-title>
 
         <measure-primary
           icon="bi-cash-coin"
           icon-class="mt-2"
-          :value="CpiYtd"
+          :value="CpiYoY"
           :tickerSymbol="tickerSymbol"
           :color="themeColor"
         >
@@ -55,16 +55,16 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYtd.intValue);
+      return colorMappingDesc(this.CpiYoY.intValue);
     },
-    CpiYtd() {
-      return this.datasets.g_cpiEnergy_YTD;
+    CpiYoY() {
+      return this.datasets.g_cpiEnergy_YoY;
     },
     PptPrevMonth() {
       return this.datasets.g_cpiEnergy_PPT;
     },
     tickerSymbol() {
-      return getTickerSymbol(this.CpiYtd);
+      return getTickerSymbol(this.CpiYoY);
     }
   }
 }

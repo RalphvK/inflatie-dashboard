@@ -6,7 +6,7 @@
       <div class="col flex flex-col gap-5">
         <widget-title :color="themeColor">
           <template #default>
-          Top {{this.groupCount}} jaarmutatie
+          Top {{this.groupCount}} grootste stijging
           </template>
         </widget-title>
 

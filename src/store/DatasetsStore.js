@@ -17,7 +17,7 @@ export const useDatasets = defineStore({
 
   getters: {
     // CPI
-    g_cpi_YTD(state) {
+    g_cpi_YoY(state) {
       return dataGetLast(state.cpi);
     },
     g_cpi_PPT(state) {
@@ -25,7 +25,7 @@ export const useDatasets = defineStore({
     },
 
     // CPI energy
-    g_cpiEnergy_YTD(state) {
+    g_cpiEnergy_YoY(state) {
       return dataGetLast(state.cpi_energie);
     },
     g_cpiEnergy_PPT(state) {
@@ -33,14 +33,14 @@ export const useDatasets = defineStore({
     },
 
     // CPI food
-    g_cpiFood_YTD(state) {
+    g_cpiFood_YoY(state) {
       return dataGetLast(state.cpi_voedingsmiddelen);
     },
     g_cpiFood_PPT(state) {
       return dataPptLastToPrev(state.cpi_voedingsmiddelen);
     },
 
-    // get highest CPI YTD groups (excl. energy/food)
+    // get highest CPI YoY groups (excl. energy/food)
     g_cpiGroups_top(state) {
       return DatasetsStore_CpiGroups_top(state);
     }

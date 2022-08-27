@@ -9,14 +9,14 @@
           Consumentenprijsindex (CPI)
           </template>
           <template #subtitle>
-            Jaarmutatie juli 2022 t.o.v. jaar eerder
+            Jaarmutatie juli 2022
           </template>
         </widget-title>
 
         <measure-primary
           icon="bi-cash-coin"
           icon-class="mt-2"
-          :value="CpiYtd"
+          :value="CpiYoY"
           :tickerSymbol="tickerSymbol"
           :color="themeColor"
         >
@@ -71,16 +71,16 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYtd.intValue);
+      return colorMappingDesc(this.CpiYoY.intValue);
     },
-    CpiYtd() {
-      return this.datasets.g_cpi_YTD;
+    CpiYoY() {
+      return this.datasets.g_cpi_YoY;
     },
     PptPrevMonth() {
       return this.datasets.g_cpi_PPT;
     },
     tickerSymbol() {
-      return getTickerSymbol(this.CpiYtd);
+      return getTickerSymbol(this.CpiYoY);
     },
     series() {
       if (!this.datasets.cpi) { return null; }
