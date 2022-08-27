@@ -54,8 +54,8 @@ export const useDatasets = defineStore({
         // parse json response
         .then((response) => response.json())
         .then((data) => {
-          merge(store.$state, data);
-          store._ready = true;
+          // merge(store.$state, data);
+          // store._ready = true;
         })
         .catch(() => {
           console.error('Could not fetch datasets!');

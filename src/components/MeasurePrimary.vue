@@ -5,7 +5,11 @@
         :icon="icon"
         :background-color="color + '-600'"
         :icon-class="iconClass" />
-      <measure-value :value="value" :color="color + '-900'" variant="main" />
+      <measure-value
+        :value="value"
+        :color="color + '-900'"
+        variant="main"
+        :skeleton-width="200" />
       <measure-ticker-symbol
         class="-ml-2"
         :symbol="tickerSymbol"

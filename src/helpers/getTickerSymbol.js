@@ -1,6 +1,5 @@
 export function getTickerSymbol(SentientNumber) {
-  if (typeof SentientNumber.getFloat !== 'function') {
-    console.log(SentientNumber);
+  if (!SentientNumber || typeof SentientNumber.getFloat !== 'function') {
     return 'none';
   } else if (SentientNumber && SentientNumber.getFloat() > 0.2) {
     return 'up';

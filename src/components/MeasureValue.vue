@@ -1,18 +1,20 @@
 <template>
-  <div :class="`measure-value font-serif text-${getTextSize} text-${color}`">
+  <div :class="`measure-value font-serif text-${getTextSize} text-${color}`" v-if="hasValue">
     <span v-for="part in getParts" :class="['part', part.type]" v-html="part.value" />
+  </div>
+  <div v-if="!hasValue">
+    <skeleton-box :width="skeletonWidth" />
   </div>
 </template>
 
 <script>
-import { splitValueParts } from "@/helpers/splitValueParts.js";
-import { isObject, isString } from "@vue/shared";
+import SkeletonBox from "@/components/SkeletonBox.vue";
+import { isObject, isString, isEmpty } from "lodash";
 
 export default {
   props: {
     value: {
-      type: [String, Object],
-      required: true
+      type: [String, Object]
     },
     color: {
       type: String,
@@ -28,7 +30,13 @@ export default {
     textSize: {
       type: String,
       default: null
+    },
+    skeletonWidth: {
+      default: 100
     }
+  },
+  components: {
+    SkeletonBox
   },
   computed: {
     getTextSize() {
@@ -53,6 +61,13 @@ export default {
           }
         ]
       }
+    },
+    hasValue() {
+      return (
+        typeof this.value !== 'undefined'
+        && this.value !== null
+        && !isEmpty(this.value)
+      )
     }
   }
 }

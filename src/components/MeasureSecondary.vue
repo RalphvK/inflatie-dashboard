@@ -1,6 +1,6 @@
 <template>
   <div class="measure-secondary flex items-baseline gap-2">
-    <measure-value :value="value" variant="sub" :color="color + '-900'"/>
+    <measure-value :value="value" variant="sub" :color="color + '-900'" skeleton-width="50px" />
     <div :class="`description text-sm font-serif font-medium text-${color}-900/80`">
      <slot></slot>
     </div>

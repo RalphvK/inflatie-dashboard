@@ -6,5 +6,5 @@ export function dataGetLast(dataset, valueColumn = 'Value')
   let lastRow = last(dataset) ?? null;
   return lastRow
     ? new SentientPercentage(lastRow[valueColumn])
-    : '-'
+    : null
 }
