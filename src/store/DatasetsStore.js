@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { merge } from "lodash";
 import { dataPptLastToPrev } from "@/helpers/dataPptLastToPrev.js";
 import { dataGetLast } from "@/helpers/dataGetLast.js";
+import DatasetsStore_CpiGroups_top from "@/store/DatasetsStore_CpiGroups_top.js";
 
 export const useDatasets = defineStore({
   id: 'datasets',
@@ -10,7 +11,8 @@ export const useDatasets = defineStore({
     _ready: false,
     cpi: null,
     cpi_energie: null,
-    cpi_voedingsmiddelen: null
+    cpi_voedingsmiddelen: null,
+    cpi_groepen: null
   }),
 
   getters: {
@@ -37,6 +39,11 @@ export const useDatasets = defineStore({
     g_cpiFood_PPT(state) {
       return dataPptLastToPrev(state.cpi_voedingsmiddelen);
     },
+
+    // get highest CPI YTD groups (excl. energy/food)
+    g_cpiGroups_top(state) {
+      return DatasetsStore_CpiGroups_top(state);
+    }
   },
 
   actions: {

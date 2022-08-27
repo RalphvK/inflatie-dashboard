@@ -5,7 +5,7 @@
         <cpi-widget class="col-span-3"></cpi-widget>
         <cpi-energy-widget></cpi-energy-widget>
         <cpi-food-widget></cpi-food-widget>
-        <cpi-energy-widget></cpi-energy-widget>
+        <cpi-groups-widget></cpi-groups-widget>
       </div>
     </div>
   </div>
@@ -15,12 +15,14 @@
 import CpiWidget from '@/components/widgets/CpiWidget.vue';
 import CpiEnergyWidget from '@/components/widgets/CpiEnergyWidget.vue';
 import CpiFoodWidget from '@/components/widgets/CpiFoodWidget.vue';
+import CpiGroupsWidget from '@/components/widgets/CpiGroupsWidget.vue';
 
 export default {
   components: {
     CpiWidget,
     CpiEnergyWidget,
-    CpiFoodWidget
+    CpiFoodWidget,
+    CpiGroupsWidget
   }
 }
 </script>
