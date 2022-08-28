@@ -3,7 +3,7 @@
     <span v-for="part in getParts" :class="['part', part.type]" v-html="part.value" />
   </div>
   <div v-if="!hasValue">
-    <skeleton-box :width="skeletonWidth" />
+    <skeleton-box :width="skeletonWidth" :height="skeletonHeight" />
   </div>
 </template>
 
@@ -80,6 +80,9 @@ export default {
         && this.value !== null
         && !isEmpty(this.value)
       )
+    },
+    skeletonHeight() {
+      return this.variant == 'sub' ? 28 : null;
     }
   }
 }
