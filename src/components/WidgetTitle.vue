@@ -1,6 +1,6 @@
 <template>
   <div class="widget-title">
-    <h3 :class="`font-medium text-lg text-${color}-900`">
+    <h3 :class="`font-medium text-lg text-${color}-900 min-w-max`">
       <slot name="default"></slot>
     </h3>
     <span :class="`font-medium text-sm text-${color}-900`">
