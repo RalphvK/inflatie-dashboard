@@ -5,7 +5,7 @@
     icon="bi-cash-coin"
     icon-class="mt-2">
     <template #primaryTitle>
-      Consumentenprijsindex (CPI)
+      Consumentenprijsindex (HICP)
     </template>
     <template #primarySubtitle>
       Jaarmutatie juli 2022
