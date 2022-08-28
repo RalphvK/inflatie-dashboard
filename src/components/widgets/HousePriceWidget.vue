@@ -6,10 +6,10 @@
       <div class="col flex flex-col gap-5 justify-between">
         <widget-title :color="themeColor">
           <template #default>
-          CPI Energie
+          Koopwoningen
           </template>
           <template #subtitle>
-            Jaarmutatie juli 2022
+            Jaarmutatie gem. verkoopprijs juli 2022
           </template>
         </widget-title>
 
@@ -21,7 +21,7 @@
         >
         </measure-primary>
         
-        <measure-secondary :value="PptPrevMonth" :color="themeColor">
+        <measure-secondary :value="PptPrevMonth" :color="PptColor">
           t.o.v. voorgaande maand
         </measure-secondary>
       </div>
@@ -57,10 +57,14 @@ export default {
       return colorMappingDesc(this.CpiYoY.intValue);
     },
     CpiYoY() {
-      return this.datasets.g_cpiEnergy_YoY;
+      return this.datasets.g_housePrice_YoY;
     },
     PptPrevMonth() {
-      return this.datasets.g_cpiEnergy_PPT;
+      return this.datasets.g_housePrice_PPT;
+    },
+    PptColor() {
+      if (!this.datasets._ready) { return 'neutral'; }
+      return colorMappingDesc(this.PptPrevMonth.intValue, null, THEME.success);
     },
     tickerSymbol() {
       return getTickerSymbol(this.CpiYoY);

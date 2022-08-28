@@ -12,7 +12,8 @@ export const useDatasets = defineStore({
     cpi: null,
     cpi_energie: null,
     cpi_voedingsmiddelen: null,
-    cpi_groepen: null
+    cpi_groepen: null,
+    koopwoningen: null
   }),
 
   getters: {
@@ -45,7 +46,15 @@ export const useDatasets = defineStore({
       if (Array.isArray(state.cpi_groepen)) {
         return dataSortByCol(state.cpi_groepen);
       } return [];
-    }
+    },
+
+    // house pricess
+    g_housePrice_YoY(state) {
+      return dataGetLast(state.koopwoningen, 'Prijsindex_ontwikkeling');
+    },
+    g_housePrice_PPT(state) {
+      return dataPptLastToPrev(state.koopwoningen, 'Prijsindex_ontwikkeling');
+    },
   },
 
   actions: {

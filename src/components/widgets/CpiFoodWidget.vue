@@ -1,5 +1,5 @@
 <template>
-  <dashboard-card :color="themeColor">
+  <dashboard-card>
     <div class="flex flex-col md:flex-row gap-5 h-full">
 
       <!-- left column -->

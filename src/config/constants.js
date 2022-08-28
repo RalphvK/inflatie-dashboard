@@ -1,7 +1,7 @@
 export const THEME = {
   danger: 'rose',
   warning: 'amber',
-  success: 'green',
+  success: 'emerald',
   info: 'blue',
   neutral: 'slate'
 }

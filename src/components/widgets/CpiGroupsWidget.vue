@@ -1,5 +1,5 @@
 <template>
-  <dashboard-card :color="themeColor">
+  <dashboard-card>
     <div>
 
       <!-- left column -->
