@@ -63,6 +63,20 @@ describe('SentientNumber', () => {
       { type: 'fractional', value: '62' },
     ]);
   });
+  
+  it('toPartsWith0', () => {
+    // test with period
+    let numObj = new SentientNumber('0.62', '.');
+    console.log('intValue: ',numObj.intValue);
+    console.log('decimalParts: ',numObj.getDecimalParts());
+    const parts = numObj.toParts();
+    console.log(parts);
+    expect(parts).toEqual([
+      { type: 'integral', value: '0' },
+      { type: 'decimal-separator', value: ',' },
+      { type: 'fractional', value: '62' },
+    ]);
+  });
 
   it('toString', () => {
     let numObj = new SentientNumber('34,000,000.62', '.');

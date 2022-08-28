@@ -71,6 +71,10 @@ export class SentientNumber {
     if (this.precision) {
       integral = integral.slice(0, integral.length - this.precision);
       fractional = String(this.intValue).slice(integral.length);
+      // if only fractional numbers (eg. 0.62), set integral to 0
+      if (integral == '' || integral == null) {
+        integral = '0';
+      }
     }
     return {
       integral: integral,
