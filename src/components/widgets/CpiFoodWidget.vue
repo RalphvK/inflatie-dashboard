@@ -14,8 +14,7 @@
         </widget-title>
 
         <measure-primary
-          icon="bi-cash-coin"
-          icon-class="mt-2"
+          icon="bi-basket2-fill"
           :value="CpiYoY"
           :tickerSymbol="tickerSymbol"
           :color="themeColor"
