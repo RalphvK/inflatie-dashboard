@@ -14,7 +14,7 @@
         </widget-title>
 
         <measure-primary
-          icon="bi-fire"
+          icon="bi-house-fill"
           :value="CpiYoY"
           :tickerSymbol="tickerSymbol"
           :color="themeColor"
@@ -54,7 +54,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYoY.intValue);
+      return colorMappingDesc(this.CpiYoY.getFloat());
     },
     CpiYoY() {
       return this.datasets.g_housePrice_YoY;

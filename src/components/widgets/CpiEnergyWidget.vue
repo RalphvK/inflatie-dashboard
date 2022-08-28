@@ -1,26 +1,21 @@
 <template>
-  <dashboard-card>
+  <dashboard-card :color="isExtreme ? themeColor : THEME.neutral">
     <div class="flex flex-col md:flex-row gap-5 h-full">
 
       <!-- left column -->
       <div class="col flex flex-col gap-5 justify-between">
         <widget-title :color="themeColor">
           <template #default>
-          CPI Energie
+            CPI Energie
           </template>
           <template #subtitle>
             Jaarmutatie juli 2022
           </template>
         </widget-title>
 
-        <measure-primary
-          icon="bi-fire"
-          :value="CpiYoY"
-          :tickerSymbol="tickerSymbol"
-          :color="themeColor"
-        >
+        <measure-primary icon="bi-fire" :value="CpiYoY" :tickerSymbol="tickerSymbol" :color="themeColor" :pulsing="isExtreme">
         </measure-primary>
-        
+
         <measure-secondary :value="PptPrevMonth" :color="themeColor">
           t.o.v. voorgaande maand
         </measure-secondary>
@@ -31,8 +26,9 @@
 </template>
 
 <script setup>
-  import {useDatasets} from '@/store/DatasetsStore.js';
-  const datasets = useDatasets();
+import { useDatasets } from '@/store/DatasetsStore.js';
+import { THEME } from '@/config/constants.js';
+const datasets = useDatasets();
 </script>
 
 <script>
@@ -54,7 +50,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYoY.intValue);
+      return colorMappingDesc(this.CpiYoY.getFloat());
     },
     CpiYoY() {
       return this.datasets.g_cpiEnergy_YoY;
@@ -64,6 +60,10 @@ export default {
     },
     tickerSymbol() {
       return getTickerSymbol(this.CpiYoY);
+    },
+    isExtreme() {
+      if (!this.CpiYoY || typeof this.CpiYoY.getFloat !== 'function' ) { return false; }
+      return this.CpiYoY.getFloat() > 20;
     }
   }
 }

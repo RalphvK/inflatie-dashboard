@@ -54,7 +54,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYoY.intValue);
+      return colorMappingDesc(this.CpiYoY.getFloat());
     },
     CpiYoY() {
       return this.datasets.g_cpiFood_YoY;

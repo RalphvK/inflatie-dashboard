@@ -4,7 +4,9 @@
         v-if="icon"
         :icon="icon"
         :background-color="color + '-600'"
-        :icon-class="iconClass" />
+        :icon-class="iconClass"
+        :pulsing="pulsing"
+      />
       <measure-value
         :value="value"
         :color="color + '-900'"
@@ -42,6 +44,10 @@ export default {
     value: {
       type: [String, Object],
       required: true
+    },
+    pulsing: {
+      type: Boolean,
+      default: false
     },
     tickerSymbol: {
       type: String,

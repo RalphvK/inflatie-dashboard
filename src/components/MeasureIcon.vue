@@ -1,6 +1,9 @@
 <template>
-  <div :class="['icon-circle', 'bg-'+backgroundColor, 'text-'+foregroundColor]">
-    <i :class="['bi', icon, iconClass]"></i>
+  <div>
+    <div v-if="pulsing" :class="['icon-circle', 'absolute', 'animate-pulse', `shadow-xl-c shadow-${backgroundColor}`]"></div>
+    <div :class="['icon-circle', 'bg-'+backgroundColor, 'text-'+foregroundColor]">
+      <i :class="['bi', icon, iconClass]"></i>
+    </div>
   </div>
 </template>
 
@@ -26,6 +29,10 @@ export default {
     iconSize: {
       type: String,
       default: '1.6rem'
+    },
+    pulsing: {
+      type: Boolean,
+      default: false
     }
   }
 }
