@@ -2,6 +2,8 @@
   <dashboard-widget
     :primary-value="YearOnYear"
     :secondary-value="PptPrevMonth"
+    :color-mapping-primary="mapping_YearOnYear_Income"
+    :color-mapping-secondary="mapping_PptMonth_Income"
     icon="bi-house-fill">
     <template #primaryTitle>
       CAO lonen
@@ -17,6 +19,7 @@
 
 <script setup>
 import { useDatasets } from '@/store/DatasetsStore.js';
+import { mapping_YearOnYear_Income, mapping_PptMonth_Income } from '@/helpers/colorMapping.js';
 const datasets = useDatasets();
 </script>
 

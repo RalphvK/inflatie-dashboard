@@ -29,26 +29,40 @@ export function colorMappingDesc(measureValue, colorArray = null, fallback = THE
   return fallback;
 }
 
+// default year-on-year color scale
 export const mapping_YearOnYear = [
-  {min: 5, color: THEME.danger},
+  {min: 6, color: THEME.danger},
   {min: 3, color: THEME.warning},
   {min: 1, color: THEME.success},
   {min: 0, color: THEME.warning},
   {min: -Infinity, color: THEME.danger}
 ];
 
-// mapping for when YearOnYear figure is positive
+// color scale for year-on-year income change (eg. wages)
+export const mapping_YearOnYear_Income = [
+  {min: 6, color: THEME.success},
+  {min: 3, color: THEME.hopeful},
+  {min: 2, color: THEME.neutral},
+  {min: 1, color: THEME.warning},
+  {min: -Infinity, color: THEME.danger}
+];
+
+// PPT color mapping for when YearOnYear figure is positive
+// (in this scenario PPT descrease means growth is slowing down)
 export const mapping_PptMonth_PositiveYoY = [
   {min: 2, color: THEME.danger},
   {min: 0, color: THEME.danger},
-  {min: -3, color: THEME.neutral},
+  {min: -3, color: THEME.hopeful},
   {min: -20, color: THEME.green},
   {min: -Infinity, color: THEME.warning}
 ];
 
-// mapping for when YearOnYear figure is low or negative
-export const mapping_PptMonth_NegativeYoY = [
-  {min: 0, color: THEME.info},
+// PPT color mapping for income change (eg. wages)
+export const mapping_PptMonth_Income = [
+  {min: 2, color: THEME.success},
+  {min: 1, color: THEME.hopeful},
+  {min: 0.2, color: THEME.hopeful},
+  {min: 0, color: THEME.warning},
   {min: -2, color: THEME.warning},
   {min: -Infinity, color: THEME.danger}
 ];
