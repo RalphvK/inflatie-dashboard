@@ -13,7 +13,8 @@ export const useDatasets = defineStore({
     cpi_energie: null,
     cpi_voedingsmiddelen: null,
     cpi_groepen: null,
-    koopwoningen: null
+    koopwoningen: null,
+    cao_lonen: null
   }),
 
   getters: {
@@ -54,6 +55,14 @@ export const useDatasets = defineStore({
     },
     g_housePrice_PPT(state) {
       return dataPptLastToPrev(state.koopwoningen, 'Prijsindex_ontwikkeling');
+    },
+
+    // CAO wages
+    g_CaoWages_YoY(state) {
+      return dataGetLast(state.cao_lonen);
+    },
+    g_CaoWages_PPT(state) {
+      return dataPptLastToPrev(state.cao_lonen);
     },
   },
 
