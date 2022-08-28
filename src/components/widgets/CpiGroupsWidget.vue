@@ -13,7 +13,7 @@
         <div class="-mx-7 -mb-3">
           <table class="mx-0 w-full">
             <tbody :class="`divide-y divide-${themeColor}-900/10`">
-              <tr v-for="item in TopGroups">
+              <tr v-for="item in topGroups">
                 <cpi-group-row :item="item" padding-size="7" />
               </tr>
             </tbody>
@@ -53,11 +53,14 @@ export default {
   },
   computed: {
     themeColor() {
-      if (!this.datasets._ready || !this.TopGroupValue) { return 'neutral'; }
-      return colorMappingDesc(this.TopGroupValue);
+      if (!this.datasets._ready || !this.topGroupValue) { return 'neutral'; }
+      return colorMappingDesc(this.topGroupValue);
     },
-    TopGroups() {
-      if (!Array.isArray(this.datasets.g_cpiGroups_top)) { return null; }
+    topGroups() {
+      // if not items, return skeleton list
+      if (!Array.isArray(this.datasets.g_cpiGroups_top) || this.datasets.g_cpiGroups_top.length < 1) {
+        return this.skeletonList;
+      }
       // get first three groups as sentient number object
       const topGroups = this.datasets.g_cpiGroups_top.slice(0, this.groupCount);
       let displayItems = [];
@@ -69,9 +72,17 @@ export default {
       }
       return displayItems;
     },
-    TopGroupValue() {
+    topGroupValue() {
       if (!Array.isArray(this.datasets.g_cpiGroups_top)) { return null; }
       return toNumber(this.datasets.g_cpiGroups_top[0].Value);
+    },
+    skeletonList() {
+      let skeletonItem = { name: null, value: null };
+      let list = [];
+      for (let i = 0; i < this.groupCount; i++) {
+        list.push(skeletonItem);
+      }
+      return list;
     }
   }
 }
