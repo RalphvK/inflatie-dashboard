@@ -87,12 +87,10 @@ export default {
       return getTickerSymbol(this.primaryValue);
     },
     themeColor() {
-      if (this.colorPrimary) { return this.primary(); }
       if (!this.datasets._ready) { return 'neutral'; }
       return colorMappingDesc(this.primaryValue.getFloat(), this.colorMappingPrimary);
     },
     secondaryMeasureColor() {
-      if (this.colorSecondary) { return this.primary(); }
       if (!this.datasets._ready) { return 'neutral'; }
       return colorMappingDesc(this.secondaryValue.getFloat(), this.colorMappingSecondary);
     },

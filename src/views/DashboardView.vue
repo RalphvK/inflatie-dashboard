@@ -7,6 +7,7 @@
         <cpi-food-widget />
         <cpi-groups-widget />
         <house-price-widget />
+        <cao-wages-widget />
       </div>
     </div>
   </div>
@@ -18,6 +19,7 @@ import CpiEnergyWidget from '@/components/widgets/CpiEnergyWidget.vue';
 import CpiFoodWidget from '@/components/widgets/CpiFoodWidget.vue';
 import CpiGroupsWidget from '@/components/widgets/CpiGroupsWidget.vue';
 import HousePriceWidget from '@/components/widgets/HousePriceWidget.vue';
+import CaoWagesWidget from '@/components/widgets/CaoWagesWidget.vue';
 
 export default {
   components: {
@@ -25,7 +27,8 @@ export default {
     CpiEnergyWidget,
     CpiFoodWidget,
     CpiGroupsWidget,
-    HousePriceWidget
+    HousePriceWidget,
+    CaoWagesWidget
   }
 }
 </script>
