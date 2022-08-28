@@ -1,25 +1,27 @@
 <template>
   <template v-if="dataAvailable">
-    <td :class="`pr-2 py-2 flex pl-${paddingSize} max-w-max`">
-      <measure-ticker-symbol
-        class="-mt-1 mr-1"
-        :symbol="tickerSymbol"
-        :color="themeColor + '-600'"
-        v-if="tickerSymbol"
-        size="sm"
-      />
-      <measure-value
-        variant="sub"
-        :value="item.value"
-        textSize="base"
-        :color="themeColor + '-900'"
-      />
-    </td>
-    <td :class="`pr-${paddingSize} w-full`">
-      <div :class="`text-${labelFontSize} text-regular text-${themeColor}-900`">
-        {{ item.name }}
-      </div>
-    </td>
+    <tr :class="getRowBackgroundClass">
+      <td :class="`pr-2 py-2 flex pl-${paddingSize} max-w-max`">
+        <measure-ticker-symbol
+          class="-mt-1 mr-1"
+          :symbol="tickerSymbol"
+          :color="themeColor + '-600'"
+          v-if="tickerSymbol"
+          size="sm"
+        />
+        <measure-value
+          variant="sub"
+          :value="item.value"
+          textSize="base"
+          :color="themeColor + '-900'"
+        />
+      </td>
+      <td :class="`pr-${paddingSize} w-full`">
+        <div :class="`text-${labelFontSize} text-regular text-${themeColor}-900`">
+          {{ item.name }}
+        </div>
+      </td>
+    </tr>
   </template>
   <template v-if="!dataAvailable">
     <td colspan="2" :class="`py-2 flex pl-${paddingSize}`">
@@ -34,6 +36,7 @@ import MeasureTickerSymbol from '@/components/MeasureTickerSymbol.vue';
 import SkeletonBox from '@/components/SkeletonBox.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { getTickerSymbol } from '@/helpers/getTickerSymbol.js';
+import { THEME } from '@/config/constants.js';
 
 export default {
   props: {
@@ -68,6 +71,19 @@ export default {
       } else {
         return 'xs'
       }
+    },
+    getRowBackgroundClass() {
+      if (!this.item || !this.item.value) { return null; }
+      let color = THEME.neutral;
+      let opacity = 0;
+      if (this.item.value.getFloat() > 0) {
+        color = THEME.danger;
+        opacity = Math.min(this.item.value.getRoundedInt(), 100);
+      } else {
+        color = THEME.neutral;
+        opacity = Math.min(this.item.value.getRoundedInt() * -1, 100);
+      }
+      return `bg-${color}-100/${Math.round(opacity / 10) * 10}`;
     }
   }
 }

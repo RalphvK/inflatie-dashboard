@@ -1,4 +1,4 @@
-import { isInteger, parseInt, toNumber } from "lodash";
+import { isInteger, parseInt, toNumber, round } from "lodash";
 import { splitThousands } from "@/helpers/splitThousands";
 
 export class SentientNumber {
@@ -18,6 +18,10 @@ export class SentientNumber {
     if (!this.intValue) { return 0.00; }
     let parts = this.getDecimalParts();
     return toNumber(parts.integral + '.' + parts.fractional);
+  }
+
+  getRoundedInt() {
+    return parseInt(round(this.getFloat()));
   }
 
   /**
