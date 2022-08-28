@@ -47,26 +47,31 @@ export const useDatasets = defineStore({
   },
 
   actions: {
-    fetchDatasets() {
+    fetchDatasets(url = null) {
       let store = this;
+      url = url ? url : import.meta.env.VITE_DATASET_URL;
       // fetch dataset from url
-      fetch(import.meta.env.VITE_DATASET_URL)
+      fetch(url)
         // parse json response
         .then((response) => response.json())
         .then((data) => {
           if (import.meta.env.VITE_THROTTLE_FETCH) {
             setTimeout(() => {
-              merge(store.$state, data);
-              store._ready = true;
+              this.mergeDatasets(data);
             }, 1000);
           } else {
-            merge(store.$state, data);
-            store._ready = true;
+            this.mergeDatasets(data);
           }
         })
         .catch(() => {
-          console.error('Could not fetch datasets!');
+          console.error('Could not fetch datasets from: '+url);
         });
     },
+    mergeDatasets(data = null) {
+      if (!data) { return false; }
+      merge(this.$state, data);
+      this._ready = true;
+      return true;
+    }
   },
 });

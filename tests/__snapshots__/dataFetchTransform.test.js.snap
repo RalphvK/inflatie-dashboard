@@ -1,0 +1,73 @@
+// Vitest Snapshot v1
+
+exports[`datasetsStore > getters 1`] = `
+SentientPercentage {
+  "currencySymbol": "€",
+  "intValue": 103,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
+
+exports[`datasetsStore > getters 2`] = `
+SentientPercentagePoint {
+  "currencySymbol": "€",
+  "intValue": 17,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
+
+exports[`datasetsStore > getters 3`] = `
+SentientPercentage {
+  "currencySymbol": "€",
+  "intValue": 1078,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
+
+exports[`datasetsStore > getters 4`] = `
+SentientPercentagePoint {
+  "currencySymbol": "€",
+  "intValue": 243,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
+
+exports[`datasetsStore > getters 5`] = `
+SentientPercentage {
+  "currencySymbol": "€",
+  "intValue": 123,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
+
+exports[`datasetsStore > getters 6`] = `
+SentientPercentagePoint {
+  "currencySymbol": "€",
+  "intValue": 11,
+  "percentagePointSymbol": "ppt",
+  "percentageSymbol": "%",
+  "precision": 1,
+  "separator_decimal": ",",
+  "separator_thousands": ".",
+}
+`;
