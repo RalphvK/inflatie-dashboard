@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { merge } from "lodash";
 import { dataPptLastToPrev } from "@/helpers/dataPptLastToPrev.js";
 import { dataGetLast } from "@/helpers/dataGetLast.js";
-import DatasetsStore_CpiGroups_top from "@/store/DatasetsStore_CpiGroups_top.js";
+import { dataSortByCol } from "@/helpers/dataSortBy.js";
 
 export const useDatasets = defineStore({
   id: 'datasets',
@@ -42,7 +42,9 @@ export const useDatasets = defineStore({
 
     // get highest CPI YoY groups (excl. energy/food)
     g_cpiGroups_top(state) {
-      return DatasetsStore_CpiGroups_top(state);
+      if (Array.isArray(state.cpi_groepen)) {
+        return dataSortByCol(state.cpi_groepen);
+      } return [];
     }
   },
 

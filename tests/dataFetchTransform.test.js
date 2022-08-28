@@ -26,6 +26,7 @@ describe('datasetsStore', () => {
     expect(datasetsStore.g_cpiEnergy_PPT).toMatchSnapshot();
     expect(datasetsStore.g_cpiFood_YoY).toMatchSnapshot();
     expect(datasetsStore.g_cpiFood_PPT).toMatchSnapshot();
+    expect(datasetsStore.g_cpiGroups_top).toMatchSnapshot();
   });
 
 });
