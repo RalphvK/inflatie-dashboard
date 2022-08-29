@@ -7,7 +7,7 @@
         <cpi-food-widget />
         <cpi-groups-widget />
         <house-price-widget />
-        <cao-wages-widget />
+        <cao-wages-widget class="lg:col-span-2 sm:col-span-2 sm:col-span-1" />
       </div>
     </div>
   </div>

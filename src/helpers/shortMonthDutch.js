@@ -21,12 +21,14 @@ export function getShortMonthDutch(value)
       return months_dutch[longMonth];
     }
   }
-  return value;
+  return null;
 }
 
 export function getShortYearAndMonth(value, separator = ' ')
 {
-  let year = String(value).slice(2, 4); // first 4 chars are year
+  let shortYear = String(value).slice(2, 4); // first 4 chars are year
   let month = getShortMonthDutch(value);
-  return month + separator + year;
+  return month
+    ? month + separator + shortYear
+    : String(value).slice(0, 4); // return long year
 }
