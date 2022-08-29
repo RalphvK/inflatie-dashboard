@@ -1,17 +1,19 @@
-# Inflatiedashboard data repo
+# Inflatiedashboard
 
-This repo contains the scripts to automatically fetch and generate the datasets required for the Inflatiedashboard.
+## Dataloader
 
-## Usage
+The `dataloader` folder contains the scripts to automatically fetch and generate the datasets required for the Inflatiedashboard.
+
+### Usage
 
 To fetch all datasets and generate the `./public/datasets/dashboard_datasets.json` file, run:
 ```
 npm run fetch-data
 ```
 
-## Configuration
+### Configuration
 
-### Dataset URLs and transformations
+#### Dataset URLs and transformations
 
 The data to be fetched and the way it is parsed is controlled via the `dataset_definitions.js` file. This file exports an object with the following structure:
 
@@ -25,7 +27,7 @@ The data to be fetched and the way it is parsed is controlled via the `dataset_d
 }
 ```
 
-### File export option
+#### File export option
 
 The `fetch-data` command runs the `fetchAllDatasets.js` script. This file has some options at the top of the file in the `options` const. Here you can enable/disable:
 
