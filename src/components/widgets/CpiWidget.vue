@@ -66,7 +66,7 @@ export default {
     chartDataSeries() {
       if (!this.series) { return null; }
       return [{
-        name: 'Jaarmutatie CPI',
+        name: 'Jaarmutatie HICP',
         data: this.series.Value
       }]
     },

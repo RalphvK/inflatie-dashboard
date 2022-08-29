@@ -1,5 +1,5 @@
 <template>
-  <apexchart :class="class" type="area" height="250" width="100%" :options="apexOptions" :series="dataSeries" v-if="dataAvailable"></apexchart>
+  <apexchart :class="class" type="area" :height="height" width="100%" :options="apexOptions" :series="dataSeries" v-if="dataAvailable"></apexchart>
 </template>
 
 <script>
@@ -27,6 +27,18 @@ export default {
       type: String,
       default: 'slate'
     },
+    colorVariant: {
+      type: Number,
+      default: 300
+    },
+    colorSecondary: {
+      type: String,
+      default: 'slate'
+    },
+    colorSecondaryVariant: {
+      type: Number,
+      default: 300
+    },
     xFormatter: {
       type: Function
     },
@@ -35,7 +47,11 @@ export default {
     },
     class: {
       type: [String, Array, Object],
-      default: '-mb-16 -mt-8'
+      default: '-mb-16 -mt-8 max-h-full'
+    },
+    height: {
+      type: String,
+      default: '250px'
     }
   },
   computed: {
@@ -43,10 +59,16 @@ export default {
       if (!this.dataSeries || !isObject(this.dataSeries)) { return false; }
       return (Object.keys(this.dataSeries).length > 0);
     },
+    getColorSecondary() {
+      return this.colorSecondary ? this.colorSecondary : this.color;
+    },
     apexOptions() {
       if (!this.dataAvailable) { return null; }
       return {
-        colors: [colors[this.color][300]],
+        colors: [
+          colors[this.color][this.colorVariant],
+          colors[this.getColorSecondary][this.colorSecondaryVariant]
+        ],
         chart: {
           type: 'area',
           animations: {

@@ -18,9 +18,14 @@
       <chart-area
         :data-series="chartDataSeries"
         :categories="chartCategories"
-        :yMax="200"
+        :yMax="series ? dataGetMax(seriesCpi.Value) + 10 : 0"
+        :yMin="series ? dataGetMin(series.Value) - 10 : 0"
         :x-formatter="ChartXFormatter"
-        :color="themeColor"
+        color="red"
+        :color-variant="600"
+        :color-secondary="themeColor"
+        class="-mb-8 -mt-8"
+        height="225px"
       />
     </template>
   </dashboard-widget>
@@ -37,6 +42,8 @@ const datasets = useDatasets();
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import ChartArea from '@/components/ChartArea.vue';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
+import { dataGetMax } from '@/helpers/dataGetMax.js';
+import { dataGetMin } from '@/helpers/dataGetMin.js';
 import { colorMappingDesc } from '@/helpers/colorMapping';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 
@@ -64,12 +71,28 @@ export default {
       ]);
       return series;
     },
+    seriesCpi() {
+      if (!this.datasets.cao_uurloon_cpi) { return null; }
+      let series = dataToSeries(this.datasets.cao_uurloon_cpi, [
+        'Perioden_title',
+        'Value'
+      ]);
+      return series;
+    },
     chartDataSeries() {
-      if (!this.series) { return null; }
-      return [{
-        name: 'Uurloon index (2010 = 100)',
-        data: this.series.Value
-      }]
+      if (!this.series || !this.seriesCpi) { return null; }
+      return [
+        {
+          name: 'Prijsindex (2010 = 100)',
+          data: this.seriesCpi.Value,
+          type: 'line',
+        },
+        {
+          name: 'Uurloon index (2010 = 100)',
+          data: this.series.Value,
+          type: 'area',
+        },
+      ]
     },
     chartCategories() {
       if (!this.series) { return null; }

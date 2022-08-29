@@ -15,7 +15,8 @@ export const useDatasets = defineStore({
     cpi_groepen: null,
     koopwoningen: null,
     cao_lonen_mutatie: null,
-    cao_uurloon: null
+    cao_uurloon: null,
+    cao_uurloon_cpi: null
   }),
 
   getters: {
