@@ -1,7 +1,7 @@
 <template>
   <template v-if="dataAvailable">
     <tr :class="getRowBackgroundClass">
-      <td :class="`pr-2 py-2 flex pl-${paddingSize} max-w-max`">
+      <td :class="`pr-2 py-2 flex pl-${paddingSize} w-max`">
         <measure-ticker-symbol
           class="-mt-1 mr-1"
           :symbol="tickerSymbol"
