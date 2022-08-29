@@ -50,7 +50,7 @@ import MeasureSecondary from '@/components/MeasureSecondary.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { getTickerSymbol } from '@/helpers/getTickerSymbol';
-import { SentientPercentagePoint } from '@/helpers/sentientNumbers.js'
+import { SentientPercentagePoint } from '@/helpers/SentientNumber.js'
 import { mapping_PptMonth_PositiveYoY } from '@/helpers/colorMapping.js'
 
 export default {

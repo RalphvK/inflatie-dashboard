@@ -1,6 +1,6 @@
 import { describe, assert, it, expect } from "vitest";
 
-import { SentientNumber, SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumbers.js';
+import { SentientNumber, SentientPercentage, SentientPercentagePoint } from '@/helpers/SentientNumber.js';
 
 describe('SentientNumber', () => {
   

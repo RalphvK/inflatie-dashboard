@@ -1,5 +1,5 @@
 import { last } from 'lodash';
-import { SentientPercentage } from '@/helpers/SentientNumbers.js';
+import { SentientPercentage } from '@/helpers/SentientNumber.js';
 
 export function dataGetLast(dataset, valueColumn = 'Value')
 {

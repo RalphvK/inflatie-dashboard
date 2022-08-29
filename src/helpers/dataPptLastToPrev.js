@@ -1,5 +1,5 @@
 import { round } from 'lodash';
-import { SentientPercentagePoint } from '@/helpers/SentientNumbers.js';
+import { SentientPercentagePoint } from '@/helpers/SentientNumber.js';
 
 /**
  * Function to calculate percentage point change of last row to previous row.

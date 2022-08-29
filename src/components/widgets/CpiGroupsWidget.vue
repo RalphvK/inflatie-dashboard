@@ -37,7 +37,7 @@ import CpiGroupRow from '@/components/CpiGroupRow.vue';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { toNumber } from '@vue/shared';
-import { SentientPercentage } from '@/helpers/SentientNumbers.js';
+import { SentientPercentage } from '@/helpers/SentientNumber.js';
 
 export default {
   components: {
