@@ -31,16 +31,11 @@
   </dashboard-widget>
 </template>
 
-<script setup>
-import { useDatasets } from '@/store/DatasetsStore.js';
-import { mapping_YearOnYear_Income, mapping_PptMonth_Income } from '@/helpers/colorMapping.js';
-import { dataGetMax } from '@/helpers/dataGetMax.js';
-const datasets = useDatasets();
-</script>
-
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import ChartArea from '@/components/ChartArea.vue';
+import { useDatasets } from '@/store/DatasetsStore.js';
+import { mapping_YearOnYear_Income, mapping_PptMonth_Income } from '@/helpers/colorMapping.js';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
 import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { dataGetMin } from '@/helpers/dataGetMin.js';
@@ -48,6 +43,10 @@ import { colorMappingDesc } from '@/helpers/colorMapping';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets, mapping_YearOnYear_Income, mapping_PptMonth_Income, dataGetMax, dataGetMin };
+  },
   components: {
     DashboardWidget,
     ChartArea

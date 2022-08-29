@@ -36,24 +36,22 @@
   </dashboard-card>
 </template>
 
-<script setup>
-import { useDatasets } from '@/store/DatasetsStore.js';
-import { THEME } from '@/config/constants.js';
-const datasets = useDatasets();
-</script>
-
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
 import MeasurePrimary from '@/components/MeasurePrimary.vue';
 import MeasureSecondary from '@/components/MeasureSecondary.vue';
+import { useDatasets } from '@/store/DatasetsStore.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { getTickerSymbol } from '@/helpers/getTickerSymbol';
-import { SentientPercentagePoint } from '@/helpers/SentientNumber.js'
-import { mapping_PptMonth_PositiveYoY } from '@/helpers/colorMapping.js'
+import { mapping_PptMonth_PositiveYoY } from '@/helpers/colorMapping.js';
 
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets, THEME };
+  },
   components: {
     DashboardCard,
     WidgetTitle,

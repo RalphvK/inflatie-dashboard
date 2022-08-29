@@ -25,21 +25,21 @@
   </dashboard-card>
 </template>
 
-<script setup>
-  import {useDatasets} from '@/store/DatasetsStore.js';
-  const datasets = useDatasets();
-</script>
-
 <script>
 import DashboardCard from '@/components/DashboardCard.vue';
 import WidgetTitle from '@/components/WidgetTitle.vue';
 import CpiGroupRow from '@/components/CpiGroupRow.vue';
+import {useDatasets} from '@/store/DatasetsStore.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { toNumber } from '@vue/shared';
 import { SentientPercentage } from '@/helpers/SentientNumber.js';
 
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets };
+  },
   components: {
     DashboardCard,
     WidgetTitle,

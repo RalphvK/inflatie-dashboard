@@ -2,13 +2,14 @@
   <router-view></router-view>
 </template>
 
-<script setup>
-  import { useDatasets } from '@/store/DatasetsStore.js';
-  const datasets = useDatasets();
-</script>
-
 <script>
+import { useDatasets } from '@/store/DatasetsStore.js';
+
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets };
+  },
   mounted() {
     this.datasets.fetchDatasets();
   }

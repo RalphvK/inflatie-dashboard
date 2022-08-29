@@ -15,15 +15,15 @@
   </dashboard-widget>
 </template>
 
-<script setup>
-import { useDatasets } from '@/store/DatasetsStore.js';
-const datasets = useDatasets();
-</script>
-
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
+import { useDatasets } from '@/store/DatasetsStore.js';
 
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets };
+  },
   components: {
     DashboardWidget
   },

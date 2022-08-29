@@ -25,24 +25,23 @@
   </dashboard-widget>
 </template>
 
-<script setup>
-import { useDatasets } from '@/store/DatasetsStore.js';
-const datasets = useDatasets();
-</script>
-
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import ChartArea from '@/components/ChartArea.vue';
+import { useDatasets } from '@/store/DatasetsStore.js';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
 import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
-import { THEME } from '@/config/constants.js';
-import { getTickerSymbol } from '@/helpers/getTickerSymbol';
 
 export default {
+  setup() {
+    const datasets = useDatasets();
+    return { datasets, dataGetMax };
+  },
   components: {
-    DashboardWidget
+    DashboardWidget,
+    ChartArea
   },
   computed: {
     themeColor() {
