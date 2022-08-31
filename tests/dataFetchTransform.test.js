@@ -3,6 +3,8 @@ import { useDatasets } from "../src/store/DatasetsStore";
 import { setActivePinia, createPinia } from 'pinia';
 import * as datasetsData from './data/dashboard_datasets.json';
 
+import { dataGetLastAsPercentage } from '@/helpers/dataGetLast.js';
+
 setActivePinia(createPinia());
 const datasetsStore = useDatasets();
 

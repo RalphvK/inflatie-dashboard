@@ -8,7 +8,7 @@
       Consumentenprijsindex (HICP)
     </template>
     <template #primarySubtitle>
-      Jaarmutatie juli 2022
+      Jaarmutatie {{ periodTitle }}
     </template>
     <template #secondaryLabel>
       t.o.v. voorgaande maand
@@ -33,6 +33,8 @@ import { dataToSeries } from '@/helpers/dataToSeries.js';
 import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
+import { dataGetLast } from '@/helpers/dataGetLast.js';
+import { extractLongMonth, extractYear } from '@/helpers/extractMonthYear.js';
 
 export default {
   setup() {
@@ -47,6 +49,11 @@ export default {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
       return colorMappingDesc(this.CpiYoY.toFloat());
+    },
+    periodTitle() {
+      if (!this.datasets._ready) { return null; }
+      const lastPeriod = dataGetLast(this.datasets.cpi, 'Perioden_title');
+      return extractLongMonth(lastPeriod) + ' ' + extractYear(lastPeriod);
     },
     CpiYoY() {
       return this.datasets.g_cpi_YoY;

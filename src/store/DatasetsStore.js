@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { merge } from "lodash";
 import { dataPptLastToPrev } from "@/helpers/dataPptLastToPrev.js";
-import { dataGetLast } from "@/helpers/dataGetLast.js";
+import { dataGetLastAsPercentage } from "@/helpers/dataGetLast.js";
 import { dataSortByCol } from "@/helpers/dataSortBy.js";
 
 export const useDatasets = defineStore({
@@ -22,7 +22,7 @@ export const useDatasets = defineStore({
   getters: {
     // CPI
     g_cpi_YoY(state) {
-      return dataGetLast(state.cpi);
+      return dataGetLastAsPercentage(state.cpi);
     },
     g_cpi_PPT(state) {
       return dataPptLastToPrev(state.cpi);
@@ -30,7 +30,7 @@ export const useDatasets = defineStore({
 
     // CPI energy
     g_cpiEnergy_YoY(state) {
-      return dataGetLast(state.cpi_energie);
+      return dataGetLastAsPercentage(state.cpi_energie);
     },
     g_cpiEnergy_PPT(state) {
       return dataPptLastToPrev(state.cpi_energie);
@@ -38,7 +38,7 @@ export const useDatasets = defineStore({
 
     // CPI food
     g_cpiFood_YoY(state) {
-      return dataGetLast(state.cpi_voedingsmiddelen);
+      return dataGetLastAsPercentage(state.cpi_voedingsmiddelen);
     },
     g_cpiFood_PPT(state) {
       return dataPptLastToPrev(state.cpi_voedingsmiddelen);
@@ -53,7 +53,7 @@ export const useDatasets = defineStore({
 
     // house pricess
     g_housePrice_YoY(state) {
-      return dataGetLast(state.koopwoningen, 'Prijsindex_ontwikkeling');
+      return dataGetLastAsPercentage(state.koopwoningen, 'Prijsindex_ontwikkeling');
     },
     g_housePrice_PPT(state) {
       return dataPptLastToPrev(state.koopwoningen, 'Prijsindex_ontwikkeling');
@@ -61,7 +61,7 @@ export const useDatasets = defineStore({
 
     // CAO wages
     g_CaoWages_YoY(state) {
-      return dataGetLast(state.cao_lonen_mutatie);
+      return dataGetLastAsPercentage(state.cao_lonen_mutatie);
     },
     g_CaoWages_PPT(state) {
       return dataPptLastToPrev(state.cao_lonen_mutatie);
