@@ -54,7 +54,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.YearOnYear.getFloat(), this.mapping_YearOnYear_Income);
+      return colorMappingDesc(this.YearOnYear.toFloat(), this.mapping_YearOnYear_Income);
     },
     YearOnYear() {
       return this.datasets.g_CaoWages_YoY;

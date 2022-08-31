@@ -46,7 +46,7 @@ export default {
   computed: {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.CpiYoY.getFloat());
+      return colorMappingDesc(this.CpiYoY.toFloat());
     },
     CpiYoY() {
       return this.datasets.g_cpi_YoY;

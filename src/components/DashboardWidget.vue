@@ -86,15 +86,15 @@ export default {
     },
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.primaryValue.getFloat(), this.colorMappingPrimary);
+      return colorMappingDesc(this.primaryValue.toFloat(), this.colorMappingPrimary);
     },
     secondaryMeasureColor() {
       if (!this.datasets._ready) { return 'neutral'; }
-      return colorMappingDesc(this.secondaryValue.getFloat(), this.colorMappingSecondary);
+      return colorMappingDesc(this.secondaryValue.toFloat(), this.colorMappingSecondary);
     },
     isExtreme() {
-      if (!this.primaryValue || typeof this.primaryValue.getFloat !== 'function' ) { return false; }
-      return this.primaryValue.getFloat() > 20;
+      if (!this.primaryValue || typeof this.primaryValue.toFloat !== 'function' ) { return false; }
+      return this.primaryValue.toFloat() > 20;
     },
   }
 }

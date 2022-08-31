@@ -89,12 +89,17 @@ describe('SentientPercentage', () => {
   it('toString', () => {
     let numObj = new SentientPercentage('102.5', '.');
     expect(numObj.toString()).toEqual('102,5' + numObj.percentageSymbol);
-  })
+  });
 });
 
 describe('SentientPercentagePoint', () => {
   it('toString', () => {
     let numObj = new SentientPercentagePoint('102.5', '.');
     expect(numObj.toString()).toEqual('102,5' + numObj.percentagePointSymbol);
-  })
+  });
+
+  it('toFloat', () => {
+    let numObj = new SentientPercentagePoint('102.5', '.');
+    expect(numObj.toFloat()).toEqual(102.5);
+  });
 });

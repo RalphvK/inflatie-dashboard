@@ -14,14 +14,14 @@ export class SentientNumber {
     return this.parse(...args);
   }
 
-  getFloat() {
+  toFloat() {
     if (!this.intValue) { return 0.00; }
     let parts = this.getDecimalParts();
     return toNumber(parts.integral + '.' + parts.fractional);
   }
 
   getRoundedInt() {
-    return parseInt(round(this.getFloat()));
+    return parseInt(round(this.toFloat()));
   }
 
   /**

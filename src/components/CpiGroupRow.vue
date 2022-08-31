@@ -58,7 +58,7 @@ export default {
     },
     themeColor() {
       if (!this.item) { return 'neutral'; }
-      return colorMappingDesc(this.item.value.getFloat());
+      return colorMappingDesc(this.item.value.toFloat());
     },
     tickerSymbol() {
       return getTickerSymbol(this.item.value);
@@ -76,7 +76,7 @@ export default {
       if (!this.item || !this.item.value) { return null; }
       let color = THEME.neutral;
       let opacity = 0;
-      if (this.item.value.getFloat() > 0) {
+      if (this.item.value.toFloat() > 0) {
         color = THEME.danger;
         opacity = Math.min(this.item.value.getRoundedInt(), 100);
       } else {
