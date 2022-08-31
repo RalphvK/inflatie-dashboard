@@ -9,7 +9,7 @@
       CAO lonen
     </template>
     <template #primarySubtitle>
-      Jaarmutatie juli 2022
+      Jaarmutatie {{ periodTitle }}
     </template>
     <template #secondaryLabel>
       t.o.v. voorgaande maand
@@ -41,6 +41,7 @@ import { dataGetMax } from '@/helpers/dataGetMax.js';
 import { dataGetMin } from '@/helpers/dataGetMin.js';
 import { colorMappingDesc } from '@/helpers/colorMapping';
 import { getShortYearAndMonth } from '@/helpers/shortMonthDutch.js';
+import { getLastPeriodTitle_MY } from '@/helpers/getLastPeriodTitle.js';
 
 export default {
   setup() {
@@ -55,6 +56,9 @@ export default {
     themeColor() {
       if (!this.datasets._ready) { return 'neutral'; }
       return colorMappingDesc(this.YearOnYear.toFloat(), this.mapping_YearOnYear_Income);
+    },
+    periodTitle() {
+      return getLastPeriodTitle_MY(this.datasets.cao_uurloon);
     },
     YearOnYear() {
       return this.datasets.g_CaoWages_YoY;

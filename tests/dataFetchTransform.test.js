@@ -4,6 +4,8 @@ import { setActivePinia, createPinia } from 'pinia';
 import * as datasetsData from './data/dashboard_datasets.json';
 
 import { dataGetLastAsPercentage } from '@/helpers/dataGetLast.js';
+import _ from "lodash";
+import { getLastPeriodTitle_MY } from "../src/helpers/getLastPeriodTitle";
 
 setActivePinia(createPinia());
 const datasetsStore = useDatasets();
@@ -29,6 +31,14 @@ describe('datasetsStore', () => {
     expect(datasetsStore.g_cpiFood_YoY).toMatchSnapshot();
     expect(datasetsStore.g_cpiFood_PPT).toMatchSnapshot();
     expect(datasetsStore.g_cpiGroups_top).toMatchSnapshot();
+  });
+
+});
+
+describe('getLastPeriodTitle', () => {
+
+  it('getLastPeriodTitle_MY', () => {
+    expect(getLastPeriodTitle_MY(datasetsStore.cpi)).toEqual('juli 2022');
   });
 
 });

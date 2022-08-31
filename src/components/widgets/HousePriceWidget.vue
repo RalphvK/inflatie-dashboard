@@ -7,7 +7,7 @@
       Koopwoningen
     </template>
     <template #primarySubtitle>
-      Jaarmutatie gem. verkoopprijs juli 2022
+      Jaarmutatie gem. verkoopprijs {{ periodTitle }}
     </template>
     <template #secondaryLabel>
       t.o.v. voorgaande maand
@@ -18,6 +18,7 @@
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import { useDatasets } from '@/store/DatasetsStore.js';
+import { getLastPeriodTitle_MY } from '@/helpers/getLastPeriodTitle.js';
 
 export default {
   setup() {
@@ -33,7 +34,10 @@ export default {
     },
     PptPrevMonth() {
       return this.datasets.g_housePrice_PPT;
-    }
+    },
+    periodTitle() {
+      return getLastPeriodTitle_MY(this.datasets.koopwoningen);
+    },
   }
 }
 </script>
