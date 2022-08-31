@@ -16,8 +16,10 @@ export class SentientNumber {
 
   toFloat() {
     if (!this.intValue) { return 0.00; }
-    let parts = this.getDecimalParts();
-    return toNumber(parts.integral + '.' + parts.fractional);
+    let decParts = this.getDecimalParts();
+    return decParts.fractional
+      ? toNumber(decParts.integral + '.' + decParts.fractional)
+      : toNumber(decParts.integral);
   }
 
   getRoundedInt() {
