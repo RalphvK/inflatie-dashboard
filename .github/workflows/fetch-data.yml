@@ -1,0 +1,23 @@
+name: Fetch latest data
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Build and commit changes
+      run: |
+        npm run fetch-data
+        git config --global user.name "Ralph van Kruiselbergen"
+        git config --global user.email "githubaction@ravk.nl"
+        git add .
+        git commit -m "Fetch latest data from CBS"
+        git push
