@@ -15,10 +15,17 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Build and commit changes
+      run: npm run fetch-data
+    - name: Check for changes
+      run: echo ::set-output name=has_changes::$(git diff --name-only HEAD^ HEAD)
+    - name: Do something with changes
+      if: steps.changes.outputs.has_changes != ''
       run: |
-        npm run fetch-data
-        git config --global user.name "Ralph van Kruiselbergen"
+        git config --global user.name "GitHub Action"
         git config --global user.email "githubaction@ravk.nl"
         git add .
         git commit -m "Fetch latest data from CBS"
         git push
+    - name: Do something without changes
+      if: steps.changes.outputs.has_changes == ''
+      run: echo "No changes detected"
