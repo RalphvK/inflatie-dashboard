@@ -3,6 +3,7 @@ name: Fetch latest data
 on:
   schedule:
     - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
