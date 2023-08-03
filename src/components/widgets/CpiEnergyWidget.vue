@@ -2,6 +2,7 @@
   <dashboard-widget
     :primary-value="CpiYoY"
     :secondary-value="PptPrevMonth"
+    :color-mapping-primary="mapping_YearOnYear_Energy"
     icon="bi-fire">
     <template #primaryTitle>
       CPI Energie
@@ -18,12 +19,13 @@
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import { useDatasets } from '@/store/DatasetsStore.js';
+import { mapping_YearOnYear_Energy } from '@/helpers/colorMapping.js';
 import { getLastPeriodTitle_MY } from '@/helpers/getLastPeriodTitle.js';
 
 export default {
   setup() {
     const datasets = useDatasets();
-    return { datasets };
+    return { datasets, mapping_YearOnYear_Energy };
   },
   components: {
     DashboardWidget

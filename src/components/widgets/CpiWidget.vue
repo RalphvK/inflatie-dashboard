@@ -2,6 +2,7 @@
   <dashboard-widget
     :primary-value="CpiYoY"
     :secondary-value="PptPrevMonth"
+    :color-mapping-primary="mapping_YearOnYear_Inflation"
     icon="bi-cash-coin"
     icon-class="mt-2">
     <template #primaryTitle>
@@ -28,6 +29,7 @@
 <script>
 import DashboardWidget from '@/components/DashboardWidget.vue';
 import ChartArea from '@/components/ChartArea.vue';
+import { mapping_YearOnYear_Inflation } from '@/helpers/colorMapping.js';
 import { useDatasets } from '@/store/DatasetsStore.js';
 import { dataToSeries } from '@/helpers/dataToSeries.js';
 import { dataGetMax } from '@/helpers/dataGetMax.js';
@@ -38,7 +40,7 @@ import { getLastPeriodTitle_MY } from '@/helpers/getLastPeriodTitle.js';
 export default {
   setup() {
     const datasets = useDatasets();
-    return { datasets, dataGetMax };
+    return { datasets, dataGetMax, mapping_YearOnYear_Inflation };
   },
   components: {
     DashboardWidget,

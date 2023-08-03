@@ -3,7 +3,6 @@
     :primary-value="YearOnYear"
     :secondary-value="PptPrevMonth"
     :color-mapping-primary="mapping_YearOnYear_Income"
-    :color-mapping-secondary="mapping_PptMonth_Income"
     icon="bi-file-earmark-ruled-fill">
     <template #primaryTitle>
       CAO lonen

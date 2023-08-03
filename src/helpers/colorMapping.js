@@ -29,13 +29,39 @@ export function colorMappingDesc(measureValue, colorArray = null, fallback = THE
   return fallback;
 }
 
-// default year-on-year color scale
-export const mapping_YearOnYear = [
+export const mapping_neutral = [
+  {min: 6, color: THEME.neutral},
+  {min: 3, color: THEME.neutral},
+  {min: 1, color: THEME.neutral},
+  {min: 0, color: THEME.neutral},
+  {min: -Infinity, color: THEME.neutral}
+];
+
+// inflation year-on-year color scale (considers deflation a bad thing)
+export const mapping_YearOnYear_Inflation = [
   {min: 6, color: THEME.danger},
   {min: 3, color: THEME.warning},
   {min: 1, color: THEME.success},
   {min: 0, color: THEME.warning},
   {min: -Infinity, color: THEME.danger}
+];
+
+// default year-on-year color scale (considers deflation a warning)
+export const mapping_YearOnYear = [
+  {min: 6, color: THEME.danger},
+  {min: 3, color: THEME.warning},
+  {min: 1, color: THEME.success},
+  {min: 0, color: THEME.success},
+  {min: -Infinity, color: THEME.warning}
+];
+
+// default year-on-year color scale (considers deflation a good thing)
+export const mapping_YearOnYear_Energy = [
+  {min: 6, color: THEME.danger},
+  {min: 3, color: THEME.warning},
+  {min: 1, color: THEME.success},
+  {min: 0, color: THEME.success},
+  {min: -Infinity, color: THEME.success}
 ];
 
 // color scale for year-on-year income change (eg. wages)

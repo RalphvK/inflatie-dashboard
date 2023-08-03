@@ -45,7 +45,7 @@ import { useDatasets } from '@/store/DatasetsStore.js';
 import { colorMappingDesc } from '@/helpers/colorMapping.js';
 import { THEME } from '@/config/constants.js';
 import { getTickerSymbol } from '@/helpers/getTickerSymbol';
-import { mapping_PptMonth_PositiveYoY } from '@/helpers/colorMapping.js';
+import { mapping_neutral } from '@/helpers/colorMapping.js';
 
 export default {
   setup() {
@@ -77,7 +77,7 @@ export default {
     },
     colorMappingSecondary: {
       type: Array,
-      default: mapping_PptMonth_PositiveYoY
+      default: mapping_neutral
     }
   },
   computed: {
