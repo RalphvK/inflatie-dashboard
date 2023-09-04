@@ -1,39 +1,39 @@
-name: Fetch latest data
+name: Fetch CBS data and commit if changed
 
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *' # Schedule it to run every day at 6 AM UTC
   workflow_dispatch:
 
 jobs:
-  build:
-
+  check-commit-changes:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Checkout with full history
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14 # Adjust the Node.js version as needed
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build and commit changes
+    - name: Run npm run fetch-data
+      run: npm run fetch-data
+
+    - name: Check for Uncommitted Changes
       run: |
-        npm run fetch-data
-        git add .
-        git diff --cached --exit-code || git commit -m "Fetch latest data from CBS"
-
-    - name: Check for changes
-      id: changes
-      run: echo "::set-output name=has_changes::$(git diff --name-only HEAD~1 HEAD)"
-
-    - name: Do something with changes
-      if: steps.changes.outputs.has_changes != ''
-      run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "githubaction@ravk.nl"
-        git push
-
-    - name: Do something without changes
-      if: steps.changes.outputs.has_changes == ''
-      run: echo "No changes detected"
+        if git diff --exit-code -- public/datasets/dashboard_datasets.json; then
+          echo "No changes in public/datasets/dashboard_datasets.json"
+        else
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add public/datasets/dashboard_datasets.json
+          git commit -m "Auto commit: Update data"
+          git push origin master
+        fi
