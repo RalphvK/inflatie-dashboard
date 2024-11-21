@@ -11,6 +11,8 @@ To fetch all datasets and generate the `./public/datasets/dashboard_datasets.jso
 npm run fetch-data
 ```
 
+This command is periodically executed on the server to stay up to date with the CBS data.
+
 ### Configuration
 
 #### Dataset URLs and transformations
