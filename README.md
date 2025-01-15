@@ -1,5 +1,7 @@
 # Inflatiedashboard
 
+A small side project to experiment with Github actions pulling in remote csv files and to test a different project structure in Vue. It is not actively maintained and not a commercial product.
+
 ## Dataloader
 
 The `dataloader` folder contains the scripts to automatically fetch and generate the datasets required for the Inflatiedashboard.
